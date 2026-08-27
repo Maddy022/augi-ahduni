@@ -1,107 +1,105 @@
-/* AUGI - Ahmedabad University Black & Crimson Red Theme */
+/* AUGI - Ahmedabad University Pure Black & Crimson Red High-Performance Stylesheet */
 
 :root {
   --au-crimson: #8C1D24;
-  --au-crimson-dark: #6E1218;
-  --au-crimson-light: #C5222B;
-  --au-crimson-soft: rgba(140, 29, 36, 0.15);
-  --au-crimson-glow: rgba(197, 34, 43, 0.35);
+  --au-crimson-dark: #5B0E13;
+  --au-crimson-light: #BA1C26;
+  --au-crimson-glow: rgba(186, 28, 38, 0.4);
   --au-gold: #D97706;
   
-  /* Black & Dark Slate Palette */
-  --bg-primary: #070A10;
-  --bg-secondary: #0D121D;
-  --bg-card: #111827;
-  --border-color: rgba(255, 255, 255, 0.08);
-  --border-crimson: rgba(140, 29, 36, 0.4);
-  --text-main: #FFFFFF;
-  --text-muted: #94A3B8;
-  --text-subtle: #64748B;
+  --bg-black: #05070B;
+  --bg-panel: #080C14;
+  --bg-card: #0F172A;
+  --border-dark: rgba(255, 255, 255, 0.1);
+  --text-white: #FFFFFF;
+  --text-slate: #94A3B8;
 }
 
-/* Strict App-Shell Height Lock (Prevents any window scroll/jump) */
+* {
+  box-sizing: border-box;
+}
+
 html, body {
-  height: 100%;
+  height: 100vh;
   height: 100dvh;
+  width: 100vw;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: var(--bg-primary);
-  color: var(--text-main);
+  background-color: #05070B !important;
+  color: #FFFFFF !important;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Black & Crimson Glass Header */
+/* Header & Nav Bars (Deep Obsidian / Red Highlights) */
 .glass-header {
-  background: rgba(10, 14, 23, 0.94);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border-color);
+  background: #080C14 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 .glass-nav {
-  background: rgba(10, 14, 23, 0.96);
-  backdrop-filter: blur(20px);
-  border-top: 1px solid var(--border-color);
+  background: #080C14 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 .glass-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  background: #0F172A !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* Tab Switching */
+/* Tab Management - STRICT FLEX FOR ALL TABS (No display:block overrides) */
 .tab-content {
-  display: none;
-  height: 100%;
-  width: 100%;
+  display: none !important;
+  height: 100% !important;
+  width: 100% !important;
+  flex: 1 1 0% !important;
 }
 .tab-content.active {
-  display: flex;
-  flex-direction: column;
+  display: flex !important;
+  flex-direction: column !important;
 }
 
-/* Chat bubble styling */
+/* Chat Bubbles */
 .chat-bubble-user {
-  background: linear-gradient(135deg, #8C1D24 0%, #BA242C 100%);
-  color: #FFFFFF;
+  background: linear-gradient(135deg, #8C1D24 0%, #BA1C26 100%) !important;
+  color: #FFFFFF !important;
   border-radius: 16px 16px 4px 16px;
-  box-shadow: 0 4px 14px var(--au-crimson-glow);
+  box-shadow: 0 4px 14px rgba(186, 28, 38, 0.35);
 }
 
 .chat-bubble-augi {
-  background: #111827;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #F8FAFC;
+  background: #0F172A !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #F8FAFC !important;
   border-radius: 16px 16px 16px 4px;
 }
 
 .chip-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #E2E8F0;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #E2E8F0 !important;
   transition: all 0.15s ease;
 }
 .chip-btn:hover {
-  background: rgba(140, 29, 36, 0.25);
-  border-color: rgba(197, 34, 43, 0.6);
-  color: #FFFFFF;
+  background: rgba(140, 29, 36, 0.3) !important;
+  border-color: #BA1C26 !important;
+  color: #FFFFFF !important;
 }
 
-/* Map Building Elements */
+/* Map Interactions */
 .map-building {
   cursor: pointer;
   transition: transform 0.15s ease, filter 0.15s ease;
   transform-origin: center;
 }
 .map-building:hover {
-  filter: drop-shadow(0 4px 12px rgba(197, 34, 43, 0.4));
+  filter: drop-shadow(0 4px 14px rgba(186, 28, 38, 0.5));
 }
 .map-building.selected rect.bldg-card {
   stroke: #F59E0B !important;
   stroke-width: 4 !important;
-  filter: drop-shadow(0 4px 14px rgba(245, 158, 11, 0.4));
 }
 
 .gate-marker {
@@ -114,7 +112,7 @@ html, body {
 
 /* Custom Scrollbars inside scrollable tab panes */
 .pane-scroll::-webkit-scrollbar {
-  width: 4px;
+  width: 5px;
 }
 .pane-scroll::-webkit-scrollbar-track {
   background: transparent;
@@ -124,11 +122,11 @@ html, body {
   border-radius: 9999px;
 }
 .pane-scroll::-webkit-scrollbar-thumb:hover {
-  background: #C5222B;
+  background: #BA1C26;
 }
 
-/* Navigation active tab */
 .nav-btn.active-tab {
   color: #EF4444 !important;
+  background: rgba(186, 28, 38, 0.15) !important;
   font-weight: 700;
 }
