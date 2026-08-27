@@ -1,0 +1,124 @@
+/* AUGI - Ahmedabad University Campus Map & UI Stylesheet */
+
+:root {
+  --au-crimson: #8C1D24;
+  --au-crimson-dark: #6E1218;
+  --au-crimson-light: #A82A33;
+  --au-crimson-soft: #FDF2F2;
+  --au-crimson-border: #FECACA;
+  --au-gold: #D97706;
+  --border-color: #E2E8F0;
+  --border-highlight: #CBD5E1;
+  --text-main: #0F172A;
+}
+
+body {
+  background-color: #F8FAFC;
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Glass surfaces */
+.glass-header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.glass-nav {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border-color);
+}
+
+.glass-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.glass-card:hover {
+  border-color: #CBD5E1;
+}
+
+/* Tabs */
+.tab-content {
+  display: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.tab-content.active {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+#tab-tools.active, #tab-directory.active, #tab-map.active {
+  display: block;
+}
+
+/* Chat bubble styling */
+.chat-bubble-user {
+  background: linear-gradient(135deg, #8C1D24 0%, #A82A33 100%);
+  color: #FFFFFF;
+  border-radius: 18px 18px 4px 18px;
+}
+
+.chat-bubble-augi {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  color: #0F172A;
+  border-radius: 18px 18px 18px 4px;
+}
+
+.chip-btn {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  color: #334155;
+  transition: all 0.15s ease;
+}
+.chip-btn:hover {
+  background: #FDF2F2;
+  border-color: #FECDD3;
+  color: #8C1D24;
+}
+
+/* ========================================================= */
+/* HIGH-LEGIBILITY LARGE CAMPUS MAP STYLING                  */
+/* ========================================================= */
+
+.map-building {
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+  transform-origin: center;
+}
+
+.map-building:hover {
+  filter: drop-shadow(0 4px 12px rgba(15, 23, 42, 0.15));
+}
+
+/* Selected state: Clean blue focus ring with high text contrast */
+.map-building.selected rect.bldg-card {
+  stroke: #2563EB !important;
+  stroke-width: 4 !important;
+  filter: drop-shadow(0 4px 14px rgba(37, 99, 235, 0.3));
+}
+
+.gate-marker {
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+.gate-marker:hover {
+  transform: scale(1.25);
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+}
+
+/* Nav button active pill */
+.nav-btn {
+  transition: color 0.2s ease;
+}
+.nav-btn.active-tab {
+  color: #8C1D24 !important;
+  font-weight: 700;
+}
