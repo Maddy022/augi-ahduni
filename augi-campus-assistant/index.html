@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -14,11 +14,10 @@
             au: {
               crimson: '#8C1D24',
               crimsonDark: '#6E1218',
-              crimsonLight: '#A82A33',
-              crimsonSoft: '#FDF2F2',
-              crimsonBorder: '#FECACA',
+              crimsonLight: '#C5222B',
               gold: '#D97706',
-              navy: '#0F172A',
+              bgDark: '#070A10',
+              cardDark: '#111827',
             }
           }
         }
@@ -27,284 +26,262 @@
   </script>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col antialiased select-none overflow-x-hidden">
+<body class="h-full w-full overflow-hidden bg-[#070A10] text-white flex flex-col antialiased select-none">
 
-  <!-- TOP HEADER -->
-  <header class="sticky top-0 z-40 glass-header px-4 py-2 flex items-center justify-between shadow-xs">
+  <!-- TOP HEADER (Black & Crimson Red) -->
+  <header class="shrink-0 z-40 glass-header px-4 py-2 flex items-center justify-between border-b border-white/10 shadow-md">
     <!-- Brand Info -->
     <div class="flex items-center gap-2.5">
-      <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-[#8C1D24] to-[#A82A33] text-white flex items-center justify-center font-black text-xs shadow-xs border border-white/20">
+      <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-[#8C1D24] to-[#C5222B] text-white flex items-center justify-center font-black text-xs shadow-md shadow-red-950/60 border border-red-500/30">
         AU
       </div>
       <div>
         <div class="flex items-center gap-1.5">
-          <h1 class="font-black text-sm tracking-tight text-[#8C1D24] flex items-center gap-1">
+          <h1 class="font-black text-sm tracking-tight text-white flex items-center gap-1">
             AUGI
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
           </h1>
-          <span class="text-[9px] font-bold px-1.5 py-0.2 bg-red-50 text-[#8C1D24] border border-red-200 rounded-full">2026-27</span>
+          <span class="text-[9px] font-bold px-1.5 py-0.2 bg-red-950/80 text-red-300 border border-red-500/40 rounded-full">2026-27</span>
         </div>
-        <p class="text-[10px] text-slate-500 -mt-0.5 font-medium">Ahmedabad University Guide</p>
+        <p class="text-[10px] text-slate-400 -mt-0.5 font-medium">Ahmedabad University Guide</p>
       </div>
     </div>
 
     <!-- Desktop Navigation Bar -->
-    <nav class="hidden md:flex items-center gap-1 bg-white p-1 rounded-2xl border border-slate-200 shadow-xs">
-      <button data-tab="chat" class="nav-btn px-3.5 py-1 text-xs font-bold active-tab text-[#8C1D24] flex items-center gap-1.5 transition-all">
+    <nav class="hidden md:flex items-center gap-1 bg-slate-900/90 p-1 rounded-2xl border border-white/10 shadow-xs">
+      <button data-tab="chat" class="nav-btn px-3.5 py-1 text-xs font-bold active-tab text-red-500 flex items-center gap-1.5 transition-all">
         💬 Assistant
       </button>
-      <button data-tab="map" class="nav-btn px-3.5 py-1 text-xs font-medium rounded-xl text-slate-600 hover:text-[#8C1D24] flex items-center gap-1.5 transition-all">
+      <button data-tab="map" class="nav-btn px-3.5 py-1 text-xs font-medium rounded-xl text-slate-400 hover:text-white flex items-center gap-1.5 transition-all">
         🗺️ Campus Map
       </button>
-      <button data-tab="directory" class="nav-btn px-3.5 py-1 text-xs font-medium rounded-xl text-slate-600 hover:text-[#8C1D24] flex items-center gap-1.5 transition-all">
+      <button data-tab="directory" class="nav-btn px-3.5 py-1 text-xs font-medium rounded-xl text-slate-400 hover:text-white flex items-center gap-1.5 transition-all">
         👥 Directory
       </button>
-      <button data-tab="tools" class="nav-btn px-3.5 py-1 text-xs font-medium rounded-xl text-slate-600 hover:text-[#8C1D24] flex items-center gap-1.5 transition-all">
+      <button data-tab="tools" class="nav-btn px-3.5 py-1 text-xs font-medium rounded-xl text-slate-400 hover:text-white flex items-center gap-1.5 transition-all">
         ⚡ Student Tools
       </button>
     </nav>
 
     <!-- Header Actions -->
     <div class="flex items-center gap-2">
-      <button class="open-sos-btn px-2.5 py-1 bg-[#8C1D24] hover:bg-[#6E1218] text-white font-bold text-xs rounded-xl flex items-center gap-1 shadow-xs transition-all active:scale-95">
+      <button class="open-sos-btn px-2.5 py-1 bg-[#8C1D24] hover:bg-[#C5222B] text-white font-bold text-xs rounded-xl flex items-center gap-1 shadow-md shadow-red-950/60 border border-red-500/30 transition-all active:scale-95">
         <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
         <span>SOS</span>
       </button>
     </div>
   </header>
 
-  <!-- MAIN VIEW CONTAINER -->
-  <main class="flex-1 max-w-6xl w-full mx-auto p-2 sm:p-4 pb-20 md:pb-4 flex flex-col">
+  <!-- MAIN APP CONTAINER (Zero-Scroll Locked Shell) -->
+  <main class="flex-1 overflow-hidden relative max-w-6xl w-full mx-auto p-2 sm:p-3 flex flex-col">
 
     <!-- 1. CHAT TAB -->
-    <section id="tab-chat" class="tab-content active flex-1 flex flex-col h-[calc(100vh-130px)] md:h-[calc(100vh-85px)]">
-      <div id="chat-messages" class="flex-1 overflow-y-auto pr-1 sm:pr-2 space-y-2.5 mb-2"></div>
+    <section id="tab-chat" class="tab-content active h-full flex flex-col overflow-hidden">
+      <!-- Chat Messages Container -->
+      <div id="chat-messages" class="flex-1 overflow-y-auto pane-scroll pr-1 sm:pr-2 space-y-2.5 mb-2"></div>
 
-      <div class="glass-card rounded-2xl p-2 flex items-center gap-2 border border-slate-200 shadow-xs bg-white">
-        <button id="voice-btn" class="p-2 text-slate-400 hover:text-[#8C1D24] rounded-xl hover:bg-red-50 transition-all shrink-0" title="Voice Input">
+      <!-- Chat Input Box -->
+      <div class="shrink-0 glass-card rounded-2xl p-2 flex items-center gap-2 border border-white/10 bg-[#111827] shadow-lg">
+        <button id="voice-btn" class="p-2 text-slate-400 hover:text-red-400 rounded-xl hover:bg-white/5 transition-all shrink-0" title="Voice Input">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
         </button>
 
-        <input id="chat-input" type="text" placeholder="Ask AUGI about attendance, cafeterias, buildings, advisors..." class="flex-1 text-xs sm:text-sm bg-transparent border-none outline-none text-slate-900 placeholder-slate-400">
+        <input id="chat-input" type="text" placeholder="Ask AUGI about attendance, cafeterias, buildings, advisors..." class="flex-1 text-xs sm:text-sm bg-transparent border-none outline-none text-white placeholder-slate-500">
 
-        <button id="send-btn" class="p-2 bg-[#8C1D24] hover:bg-[#6E1218] text-white rounded-xl shadow-xs transition-all active:scale-95 shrink-0" title="Send Message">
+        <button id="send-btn" class="p-2 bg-gradient-to-r from-[#8C1D24] to-[#C5222B] hover:from-[#C5222B] hover:to-[#E11D48] text-white rounded-xl shadow-md transition-all active:scale-95 shrink-0 border border-red-500/20" title="Send Message">
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
         </button>
       </div>
     </section>
 
-    <!-- 2. CAMPUS MAP TAB (High Legibility Large Layout) -->
-    <section id="tab-map" class="tab-content flex-1 space-y-3">
+    <!-- 2. CAMPUS MAP TAB (High Contrast Black & Red Viewport) -->
+    <section id="tab-map" class="tab-content h-full flex flex-col overflow-hidden space-y-2">
       <!-- Search Bar -->
-      <div class="relative w-full">
-        <svg class="w-4 h-4 absolute left-3.5 top-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-        <input id="map-search" type="text" placeholder="Search buildings, CDC, Library, Gates, Food Court..." class="w-full pl-10 pr-4 py-2 text-xs sm:text-sm bg-white border border-slate-200 rounded-xl outline-none text-slate-900 placeholder-slate-400 focus:border-[#8C1D24] transition-all shadow-xs">
+      <div class="shrink-0 relative w-full">
+        <svg class="w-3.5 h-3.5 absolute left-3 top-2.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        <input id="map-search" type="text" placeholder="Search buildings, CDC, Library, Gates, Food Court..." class="w-full pl-9 pr-3 py-1.5 text-xs bg-[#111827] border border-white/10 rounded-xl outline-none text-white placeholder-slate-500 focus:border-red-500 transition-all shadow-xs">
       </div>
 
       <!-- Map & Details Grid -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-3.5 items-start">
-        <!-- SVG Map Container (8 cols on desktop) -->
-        <div class="lg:col-span-8 bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-md">
-          <svg id="campus-map-svg" viewBox="0 0 1200 800" class="w-full h-auto max-h-[70vh]">
+      <div class="flex-1 overflow-hidden grid grid-cols-1 md:grid-cols-12 gap-2.5 items-stretch">
+        <!-- SVG Map Container -->
+        <div class="md:col-span-7 bg-[#0B0F19] rounded-2xl overflow-hidden border border-white/10 shadow-md flex items-center justify-center p-1">
+          <svg id="campus-map-svg" viewBox="0 0 1200 800" class="w-full h-full max-h-full">
             <defs>
-              <pattern id="campus-grid" width="50" height="50" patternUnits="userSpaceOnUse">
-                <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#F1F5F9" stroke-width="1.2"/>
+              <pattern id="campus-grid-dark" width="50" height="50" patternUnits="userSpaceOnUse">
+                <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#1E293B" stroke-width="0.8"/>
               </pattern>
             </defs>
 
-            <!-- Background Canvas -->
-            <rect width="1200" height="800" fill="#F8FAFC"/>
-            <rect width="1200" height="800" fill="url(#campus-grid)"/>
+            <rect width="1200" height="800" fill="#070A12"/>
+            <rect width="1200" height="800" fill="url(#campus-grid-dark)"/>
 
-            <!-- Campus Zones -->
-            <!-- North Campus Zone -->
-            <rect x="360" y="30" width="500" height="160" rx="20" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="6 6"/>
+            <!-- Zones -->
+            <rect x="360" y="30" width="500" height="160" rx="20" fill="#0F172A" fill-opacity="0.6" stroke="#334155" stroke-width="1.5" stroke-dasharray="6 6"/>
             <text x="380" y="60" fill="#64748B" font-size="14" font-weight="900" letter-spacing="1.5">NORTH CAMPUS</text>
 
-            <!-- Central Campus Zone -->
-            <rect x="340" y="240" width="530" height="520" rx="24" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="6 6"/>
+            <rect x="340" y="240" width="530" height="520" rx="24" fill="#0F172A" fill-opacity="0.6" stroke="#334155" stroke-width="1.5" stroke-dasharray="6 6"/>
             <text x="365" y="270" fill="#64748B" font-size="14" font-weight="900" letter-spacing="1.5">CENTRAL CAMPUS</text>
 
-            <!-- East Campus Zone -->
-            <rect x="900" y="240" width="270" height="480" rx="20" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="6 6"/>
+            <rect x="900" y="240" width="270" height="480" rx="20" fill="#0F172A" fill-opacity="0.6" stroke="#334155" stroke-width="1.5" stroke-dasharray="6 6"/>
             <text x="925" y="270" fill="#64748B" font-size="14" font-weight="900" letter-spacing="1.5">EAST CAMPUS</text>
 
-            <!-- South Campus Zone -->
-            <rect x="50" y="520" width="260" height="240" rx="20" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="6 6"/>
+            <rect x="50" y="520" width="260" height="240" rx="20" fill="#0F172A" fill-opacity="0.6" stroke="#334155" stroke-width="1.5" stroke-dasharray="6 6"/>
             <text x="75" y="550" fill="#64748B" font-size="14" font-weight="900" letter-spacing="1.5">SOUTH CAMPUS</text>
 
-            <!-- Main Roads -->
-            <!-- University Road -->
-            <rect x="20" y="200" width="1160" height="28" rx="8" fill="#E2E8F0"/>
-            <text x="40" y="219" fill="#475569" font-size="13" font-weight="900" letter-spacing="1">UNIVERSITY ROAD</text>
+            <!-- Roads -->
+            <rect x="20" y="200" width="1160" height="28" rx="8" fill="#1E293B"/>
+            <text x="40" y="219" fill="#94A3B8" font-size="13" font-weight="900" letter-spacing="1">UNIVERSITY ROAD</text>
 
-            <!-- SV Desai Road -->
-            <rect x="880" y="210" width="22" height="560" rx="6" fill="#E2E8F0"/>
-            <text x="896" y="480" fill="#475569" font-size="12" font-weight="900" transform="rotate(90 896 480)" letter-spacing="1">S V DESAI ROAD</text>
+            <rect x="880" y="210" width="22" height="560" rx="6" fill="#1E293B"/>
+            <text x="896" y="480" fill="#94A3B8" font-size="12" font-weight="900" transform="rotate(90 896 480)" letter-spacing="1">S V DESAI ROAD</text>
 
-            <!-- ================= BUILDINGS ================= -->
-
+            <!-- BUILDINGS -->
             <!-- 1. University Administration -->
             <g class="map-building" data-id="univ_office">
-              <rect class="bldg-card" x="910" y="45" width="230" height="135" rx="16" fill="#FFFFFF" stroke="#3B82F6" stroke-width="2.5"/>
-              <rect x="910" y="45" width="230" height="40" rx="16" fill="#EFF6FF"/>
+              <rect class="bldg-card" x="910" y="45" width="230" height="135" rx="16" fill="#0F172A" stroke="#3B82F6" stroke-width="2"/>
+              <rect x="910" y="45" width="230" height="40" rx="16" fill="#1E3A8A"/>
               <circle cx="935" cy="65" r="14" fill="#3B82F6"/>
               <text x="935" y="70" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle">1</text>
-              <text x="960" y="70" fill="#1E3A8A" font-size="15" font-weight="900">Univ Admin</text>
-              <text x="925" y="112" fill="#0F172A" font-size="13" font-weight="bold">VC & Registrar Office</text>
-              <text x="925" y="132" fill="#64748B" font-size="12">Admissions & Financial Aid</text>
+              <text x="960" y="70" fill="#FFFFFF" font-size="15" font-weight="900">Univ Admin</text>
+              <text x="925" y="112" fill="#FFFFFF" font-size="13" font-weight="bold">VC & Registrar Office</text>
+              <text x="925" y="132" fill="#94A3B8" font-size="12">Admissions & Financial Aid</text>
             </g>
 
             <!-- 2. VentureStudio -->
             <g class="map-building" data-id="venturestudio">
-              <rect class="bldg-card" x="400" y="60" width="240" height="120" rx="16" fill="#FFFFFF" stroke="#9333EA" stroke-width="2.5"/>
-              <rect x="400" y="60" width="240" height="38" rx="16" fill="#FAF5FF"/>
+              <rect class="bldg-card" x="400" y="60" width="240" height="120" rx="16" fill="#0F172A" stroke="#9333EA" stroke-width="2"/>
+              <rect x="400" y="60" width="240" height="38" rx="16" fill="#581C87"/>
               <circle cx="425" cy="79" r="14" fill="#9333EA"/>
               <text x="425" y="84" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle">2</text>
-              <text x="450" y="84" fill="#581C87" font-size="15" font-weight="900">VentureStudio</text>
-              <text x="420" y="122" fill="#0F172A" font-size="13" font-weight="bold">DST Fab Shop & BioNEST</text>
-              <text x="420" y="142" fill="#64748B" font-size="12">Café VentureStudio</text>
+              <text x="450" y="84" fill="#FFFFFF" font-size="15" font-weight="900">VentureStudio</text>
+              <text x="420" y="122" fill="#FFFFFF" font-size="13" font-weight="bold">DST Fab Shop & BioNEST</text>
+              <text x="420" y="142" fill="#94A3B8" font-size="12">Café VentureStudio</text>
             </g>
 
-            <!-- 9. University Centre (UC) - Main Hub -->
+            <!-- 9. University Centre (UC) - Bold Crimson -->
             <g class="map-building selected" data-id="uc">
-              <rect class="bldg-card" x="520" y="470" width="200" height="195" rx="18" fill="#FFFFFF" stroke="#8C1D24" stroke-width="3"/>
+              <rect class="bldg-card" x="520" y="470" width="200" height="195" rx="18" fill="#180A0D" stroke="#8C1D24" stroke-width="3"/>
               <rect x="520" y="470" width="200" height="45" rx="18" fill="#8C1D24"/>
               <circle cx="545" cy="492" r="15" fill="#FFFFFF"/>
               <text x="545" y="497" fill="#8C1D24" font-size="13" font-weight="900" text-anchor="middle">9</text>
               <text x="570" y="498" fill="#FFFFFF" font-size="15" font-weight="900">University Centre</text>
-              <text x="540" y="540" fill="#0F172A" font-size="13" font-weight="bold">Health Centre (1st Fl)</text>
-              <text x="540" y="562" fill="#0F172A" font-size="13" font-weight="bold">ODS & Wellness (2nd Fl)</text>
-              <text x="540" y="584" fill="#0F172A" font-size="13" font-weight="bold">CDC Careers (4th Fl)</text>
-              <text x="540" y="606" fill="#64748B" font-size="12">Food Court • Bookstore</text>
-              <text x="540" y="626" fill="#64748B" font-size="12">Gymnasium & Silent Study</text>
+              <text x="540" y="540" fill="#FFFFFF" font-size="13" font-weight="bold">Health Centre (1st Fl)</text>
+              <text x="540" y="562" fill="#FFFFFF" font-size="13" font-weight="bold">ODS & Wellness (2nd Fl)</text>
+              <text x="540" y="584" fill="#FFFFFF" font-size="13" font-weight="bold">CDC Careers (4th Fl)</text>
+              <text x="540" y="606" fill="#FECACA" font-size="12">Food Court • Bookstore</text>
+              <text x="540" y="626" fill="#FECACA" font-size="12">Gymnasium & Silent Study</text>
             </g>
 
             <!-- 10. GICT Building (SEAS) -->
             <g class="map-building" data-id="gict">
-              <rect class="bldg-card" x="370" y="400" width="130" height="200" rx="16" fill="#FFFFFF" stroke="#0284C7" stroke-width="2.5"/>
-              <rect x="370" y="400" width="130" height="42" rx="16" fill="#F0F9FF"/>
+              <rect class="bldg-card" x="370" y="400" width="130" height="200" rx="16" fill="#0F172A" stroke="#0284C7" stroke-width="2"/>
+              <rect x="370" y="400" width="130" height="42" rx="16" fill="#0369A1"/>
               <circle cx="395" cy="421" r="14" fill="#0284C7"/>
               <text x="395" y="426" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle">10</text>
-              <text x="420" y="426" fill="#0369A1" font-size="14" font-weight="900">GICT</text>
-              <text x="385" y="465" fill="#0F172A" font-size="13" font-weight="bold">SEAS Engg</text>
-              <text x="385" y="488" fill="#0F172A" font-size="13" font-weight="bold">Central Library</text>
-              <text x="385" y="508" fill="#0369A1" font-size="11" font-weight="bold">Open 24 Hours</text>
-              <text x="385" y="532" fill="#64748B" font-size="12">GCEE & CLEF</text>
+              <text x="420" y="426" fill="#FFFFFF" font-size="14" font-weight="900">GICT</text>
+              <text x="385" y="465" fill="#FFFFFF" font-size="13" font-weight="bold">SEAS Engg</text>
+              <text x="385" y="488" fill="#FFFFFF" font-size="13" font-weight="bold">Central Library</text>
+              <text x="385" y="508" fill="#38BDF8" font-size="11" font-weight="bold">Open 24 Hours</text>
+              <text x="385" y="532" fill="#94A3B8" font-size="12">GCEE & CLEF</text>
             </g>
 
             <!-- 8. School of Arts and Sciences (SAS) -->
             <g class="map-building" data-id="sas">
-              <rect class="bldg-card" x="710" y="320" width="145" height="140" rx="16" fill="#FFFFFF" stroke="#0D9488" stroke-width="2.5"/>
-              <rect x="710" y="320" width="145" height="40" rx="16" fill="#F0FDFA"/>
+              <rect class="bldg-card" x="710" y="320" width="145" height="140" rx="16" fill="#0F172A" stroke="#0D9488" stroke-width="2"/>
+              <rect x="710" y="320" width="145" height="40" rx="16" fill="#0F766E"/>
               <circle cx="732" cy="340" r="14" fill="#0D9488"/>
               <text x="732" y="345" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle">8</text>
-              <text x="752" y="345" fill="#115E59" font-size="14" font-weight="900">SAS Bldg</text>
-              <text x="725" y="385" fill="#0F172A" font-size="13" font-weight="bold">Arts & Sciences</text>
-              <text x="725" y="405" fill="#64748B" font-size="12">Reading Room</text>
-              <text x="725" y="425" fill="#64748B" font-size="12">Science Labs</text>
+              <text x="752" y="345" fill="#FFFFFF" font-size="14" font-weight="900">SAS Bldg</text>
+              <text x="725" y="385" fill="#FFFFFF" font-size="13" font-weight="bold">Arts & Sciences</text>
+              <text x="725" y="405" fill="#94A3B8" font-size="12">Reading Room</text>
+              <text x="725" y="425" fill="#94A3B8" font-size="12">Science Labs</text>
             </g>
 
-            <!-- 6. Amrut Mody School of Management (AMSOM) -->
+            <!-- 6. AMSOM -->
             <g class="map-building" data-id="amsom">
-              <rect class="bldg-card" x="740" y="500" width="120" height="140" rx="16" fill="#FFFFFF" stroke="#D97706" stroke-width="2.5"/>
-              <rect x="740" y="500" width="120" height="40" rx="16" fill="#FFFBEB"/>
+              <rect class="bldg-card" x="740" y="500" width="120" height="140" rx="16" fill="#0F172A" stroke="#D97706" stroke-width="2"/>
+              <rect x="740" y="500" width="120" height="40" rx="16" fill="#B45309"/>
               <circle cx="762" cy="520" r="14" fill="#D97706"/>
               <text x="762" y="525" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle">6</text>
-              <text x="782" y="525" fill="#92400E" font-size="14" font-weight="900">AMSOM</text>
-              <text x="752" y="565" fill="#0F172A" font-size="13" font-weight="bold">Management</text>
-              <text x="752" y="585" fill="#64748B" font-size="12">MBA Studios</text>
-              <text x="752" y="605" fill="#64748B" font-size="12">Case Rooms</text>
+              <text x="782" y="525" fill="#FFFFFF" font-size="14" font-weight="900">AMSOM</text>
+              <text x="752" y="565" fill="#FFFFFF" font-size="13" font-weight="bold">Management</text>
+              <text x="752" y="585" fill="#94A3B8" font-size="12">MBA Studios</text>
+              <text x="752" y="605" fill="#94A3B8" font-size="12">Case Rooms</text>
             </g>
 
-            <!-- 0. The Arboretum & Central Lawns -->
+            <!-- 0. Arboretum -->
             <g class="map-building" data-id="arboretum">
-              <circle cx="610" cy="350" r="60" fill="#F0FDF4" stroke="#16A34A" stroke-width="2.5"/>
-              <text x="610" y="342" fill="#166534" font-size="14" font-weight="900" text-anchor="middle">The Arboretum</text>
-              <text x="610" y="360" fill="#15803D" font-size="12" font-weight="bold" text-anchor="middle">Stepwell & Lawns</text>
-              <text x="610" y="378" fill="#4B5563" font-size="11" text-anchor="middle">3 Lakh sq ft Green</text>
+              <circle cx="610" cy="350" r="60" fill="#064E3B" stroke="#10B981" stroke-width="2"/>
+              <text x="610" y="342" fill="#FFFFFF" font-size="14" font-weight="900" text-anchor="middle">The Arboretum</text>
+              <text x="610" y="360" fill="#A7F3D0" font-size="12" font-weight="bold" text-anchor="middle">Stepwell & Lawns</text>
+              <text x="610" y="378" fill="#D1FAE5" font-size="11" text-anchor="middle">3 Lakh sq ft Green</text>
             </g>
 
-            <!-- 11. Undergraduate Programmes (BK Majumdar & HL) -->
+            <!-- 11. Undergraduate / HL -->
             <g class="map-building" data-id="undergrad_hl">
-              <rect class="bldg-card" x="925" y="460" width="225" height="150" rx="16" fill="#FFFFFF" stroke="#4F46E5" stroke-width="2.5"/>
-              <rect x="925" y="460" width="225" height="40" rx="16" fill="#EEF2FF"/>
+              <rect class="bldg-card" x="925" y="460" width="225" height="150" rx="16" fill="#0F172A" stroke="#4F46E5" stroke-width="2"/>
+              <rect x="925" y="460" width="225" height="40" rx="16" fill="#3730A3"/>
               <circle cx="950" cy="480" r="14" fill="#4F46E5"/>
               <text x="950" y="485" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle">11</text>
-              <text x="975" y="485" fill="#3730A3" font-size="14" font-weight="900">Undergrad / HL</text>
-              <text x="945" y="525" fill="#0F172A" font-size="13" font-weight="bold">BK Majumdar Building</text>
-              <text x="945" y="545" fill="#0F172A" font-size="13" font-weight="bold">Exam Controller Office</text>
-              <text x="945" y="565" fill="#64748B" font-size="12">Cricket Ground & ATM</text>
+              <text x="975" y="485" fill="#FFFFFF" font-size="14" font-weight="900">Undergrad / HL</text>
+              <text x="945" y="525" fill="#FFFFFF" font-size="13" font-weight="bold">BK Majumdar Building</text>
+              <text x="945" y="545" fill="#FFFFFF" font-size="13" font-weight="bold">Exam Controller Office</text>
+              <text x="945" y="565" fill="#94A3B8" font-size="12">Cricket Ground & ATM</text>
             </g>
 
-            <!-- 3. Biosciences Lab (South) -->
+            <!-- 3. Bio Lab -->
             <g class="map-building" data-id="bio_lab">
-              <rect class="bldg-card" x="70" y="580" width="210" height="120" rx="16" fill="#FFFFFF" stroke="#059669" stroke-width="2.5"/>
-              <rect x="70" y="580" width="210" height="38" rx="16" fill="#ECFDF5"/>
+              <rect class="bldg-card" x="70" y="580" width="210" height="120" rx="16" fill="#0F172A" stroke="#059669" stroke-width="2"/>
+              <rect x="70" y="580" width="210" height="38" rx="16" fill="#065F46"/>
               <circle cx="95" cy="599" r="14" fill="#059669"/>
               <text x="95" y="604" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle">3</text>
-              <text x="120" y="604" fill="#065F46" font-size="14" font-weight="900">Bio Lab (South)</text>
-              <text x="88" y="640" fill="#0F172A" font-size="13" font-weight="bold">Biosciences Research</text>
-              <text x="88" y="660" fill="#64748B" font-size="12">Cell Culture & Genomics</text>
+              <text x="120" y="604" fill="#FFFFFF" font-size="14" font-weight="900">Bio Lab (South)</text>
+              <text x="88" y="640" fill="#FFFFFF" font-size="13" font-weight="bold">Biosciences Research</text>
+              <text x="88" y="660" fill="#94A3B8" font-size="12">Cell Culture & Genomics</text>
             </g>
 
             <!-- 15. Sports Complex -->
             <g class="map-building" data-id="sports_complex">
-              <rect class="bldg-card" x="35" y="270" width="250" height="155" rx="16" fill="#FFFFFF" stroke="#047857" stroke-width="2.5"/>
-              <rect x="35" y="270" width="250" height="40" rx="16" fill="#ECFDF5"/>
+              <rect class="bldg-card" x="35" y="270" width="250" height="155" rx="16" fill="#0F172A" stroke="#047857" stroke-width="2"/>
+              <rect x="35" y="270" width="250" height="40" rx="16" fill="#064E3B"/>
               <circle cx="60" cy="290" r="14" fill="#047857"/>
               <text x="60" y="295" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle">15</text>
-              <text x="85" y="295" fill="#064E3B" font-size="15" font-weight="900">Sports Complex</text>
-              <text x="55" y="335" fill="#0F172A" font-size="13" font-weight="bold">400m Track & Courts</text>
-              <text x="55" y="357" fill="#64748B" font-size="12">Football • Tennis • Cricket</text>
-              <text x="55" y="377" fill="#64748B" font-size="12">Basketball • Pickleball</text>
+              <text x="85" y="295" fill="#FFFFFF" font-size="15" font-weight="900">Sports Complex</text>
+              <text x="55" y="335" fill="#FFFFFF" font-size="13" font-weight="bold">400m Track & Courts</text>
+              <text x="55" y="357" fill="#94A3B8" font-size="12">Football • Tennis • Cricket</text>
+              <text x="55" y="377" fill="#94A3B8" font-size="12">Basketball • Pickleball</text>
             </g>
 
-            <!-- ================= GATES (LARGE TAP PINS) ================= -->
-
-            <!-- Gate 10 (Main Gate) -->
+            <!-- GATES (High-Visibility Red & Amber Badges) -->
             <g class="gate-marker" data-gate="10">
-              <circle cx="865" cy="400" r="18" fill="#8C1D24" stroke="#FFFFFF" stroke-width="3"/>
+              <circle cx="865" cy="400" r="18" fill="#EF4444" stroke="#FFFFFF" stroke-width="3"/>
               <text x="865" y="405" fill="#FFFFFF" font-size="12" font-weight="900" text-anchor="middle">G10</text>
             </g>
-
-            <!-- Gate 12 (UC Entrance) -->
             <g class="gate-marker" data-gate="12">
               <circle cx="600" cy="200" r="17" fill="#D97706" stroke="#FFFFFF" stroke-width="3"/>
               <text x="600" y="205" fill="#FFFFFF" font-size="11" font-weight="bold" text-anchor="middle">G12</text>
             </g>
-
-            <!-- Gate 6 (Central West) -->
             <g class="gate-marker" data-gate="6">
               <circle cx="360" cy="670" r="17" fill="#D97706" stroke="#FFFFFF" stroke-width="3"/>
               <text x="360" y="675" fill="#FFFFFF" font-size="11" font-weight="bold" text-anchor="middle">G6</text>
             </g>
-
-            <!-- Gate 7 (SV Desai Road) -->
             <g class="gate-marker" data-gate="7">
               <circle cx="880" cy="670" r="17" fill="#D97706" stroke="#FFFFFF" stroke-width="3"/>
               <text x="880" y="675" fill="#FFFFFF" font-size="11" font-weight="bold" text-anchor="middle">G7</text>
             </g>
-
-            <!-- Gate 8 (East Campus) -->
             <g class="gate-marker" data-gate="8">
               <circle cx="920" cy="400" r="17" fill="#D97706" stroke="#FFFFFF" stroke-width="3"/>
               <text x="920" y="405" fill="#FFFFFF" font-size="11" font-weight="bold" text-anchor="middle">G8</text>
             </g>
-
-            <!-- Gate 3 (VentureStudio) -->
             <g class="gate-marker" data-gate="3">
               <circle cx="650" cy="30" r="17" fill="#D97706" stroke="#FFFFFF" stroke-width="3"/>
               <text x="650" y="35" fill="#FFFFFF" font-size="11" font-weight="bold" text-anchor="middle">G3</text>
             </g>
-
-            <!-- Gate 5 (South Campus) -->
             <g class="gate-marker" data-gate="5">
               <circle cx="170" cy="520" r="17" fill="#D97706" stroke="#FFFFFF" stroke-width="3"/>
               <text x="170" y="525" fill="#FFFFFF" font-size="11" font-weight="bold" text-anchor="middle">G5</text>
             </g>
-
-            <!-- Gate 15 (Sports Entrance) -->
             <g class="gate-marker" data-gate="15">
               <circle cx="35" cy="240" r="17" fill="#D97706" stroke="#FFFFFF" stroke-width="3"/>
               <text x="35" y="245" fill="#FFFFFF" font-size="11" font-weight="bold" text-anchor="middle">G15</text>
@@ -312,22 +289,22 @@
           </svg>
         </div>
 
-        <!-- Details Card (4 cols on desktop, directly beside map) -->
-        <div id="building-details" class="lg:col-span-4">
+        <!-- Details Card -->
+        <div id="building-details" class="md:col-span-5 h-full overflow-y-auto pane-scroll">
           <!-- Rendered by selectBuilding -->
         </div>
       </div>
     </section>
 
     <!-- 3. DIRECTORY TAB -->
-    <section id="tab-directory" class="tab-content flex-1 space-y-3">
-      <!-- Search and Filter Bar at Top -->
-      <div class="flex flex-col sm:flex-row gap-2">
+    <section id="tab-directory" class="tab-content h-full flex flex-col overflow-hidden space-y-2">
+      <!-- Search & Filters at Top -->
+      <div class="shrink-0 flex flex-col sm:flex-row gap-2">
         <div class="relative flex-1">
-          <svg class="w-3.5 h-3.5 absolute left-3 top-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-          <input id="directory-search" type="text" placeholder="Search major (e.g. CSE, Finance, Economics, Physics)..." class="w-full pl-9 pr-3 py-2 text-xs bg-white border border-slate-200 rounded-xl outline-none text-slate-900 placeholder-slate-400 focus:border-[#8C1D24] transition-all shadow-xs">
+          <svg class="w-3.5 h-3.5 absolute left-3 top-2.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          <input id="directory-search" type="text" placeholder="Search major (e.g. CSE, Finance, Economics, Physics)..." class="w-full pl-9 pr-3 py-1.5 text-xs bg-[#111827] border border-white/10 rounded-xl outline-none text-white placeholder-slate-500 focus:border-red-500 transition-all shadow-xs">
         </div>
-        <select id="school-filter" class="text-xs px-3 py-2 bg-white border border-slate-200 rounded-xl outline-none text-slate-800 shadow-xs">
+        <select id="school-filter" class="text-xs px-3 py-1.5 bg-[#111827] border border-white/10 rounded-xl outline-none text-white shadow-xs">
           <option value="all">All Schools & Centres</option>
           <option value="Engineering">School of Engineering (SEAS)</option>
           <option value="Arts and Sciences">School of Arts & Sciences (SAS)</option>
@@ -335,27 +312,27 @@
         </select>
       </div>
 
-      <!-- Directory List -->
-      <div id="directory-list" class="space-y-3"></div>
+      <!-- Directory List Pane -->
+      <div id="directory-list" class="flex-1 overflow-y-auto pane-scroll space-y-2.5 pr-1"></div>
     </section>
 
     <!-- 4. STUDENT TOOLS TAB -->
-    <section id="tab-tools" class="tab-content flex-1 space-y-4">
+    <section id="tab-tools" class="tab-content h-full flex flex-col overflow-y-auto pane-scroll space-y-3 pr-1">
       
       <!-- ATTENDANCE CALCULATOR -->
-      <div class="glass-card p-4 rounded-2xl border border-slate-200 bg-white">
+      <div class="glass-card p-4 rounded-2xl border border-white/10 bg-[#111827] shadow-lg">
         <div class="flex items-center gap-2.5 mb-3">
-          <span class="p-2 bg-red-50 text-[#8C1D24] border border-red-200 rounded-xl text-xs font-bold">📉</span>
+          <span class="p-2 bg-red-950/80 text-red-300 border border-red-500/40 rounded-xl text-xs font-bold">📉</span>
           <div>
-            <h3 class="font-bold text-xs sm:text-sm text-slate-900">Attendance & Grade Drop Simulator</h3>
-            <p class="text-[11px] text-slate-500">Calculate exact safe absences before a 1-grade drop or NP grade</p>
+            <h3 class="font-bold text-xs sm:text-sm text-white">Attendance & Grade Drop Simulator</h3>
+            <p class="text-[11px] text-slate-400">Calculate exact safe absences before a 1-grade drop or NP grade</p>
           </div>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-3">
           <div>
-            <label class="text-[10px] font-bold text-slate-600 block mb-1 uppercase tracking-wider">Course Credits</label>
-            <select id="att-credits" class="w-full text-xs p-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 outline-none focus:border-[#8C1D24]">
+            <label class="text-[10px] font-bold text-slate-400 block mb-1 uppercase tracking-wider">Course Credits</label>
+            <select id="att-credits" class="w-full text-xs p-2 bg-slate-950 border border-white/10 rounded-lg text-white outline-none focus:border-red-500">
               <option value="4">4.0 Credits (45 Sessions)</option>
               <option value="3" selected>3.0 Credits (30 Sessions)</option>
               <option value="2">2.0 Credits (20 Sessions)</option>
@@ -364,12 +341,12 @@
             </select>
           </div>
           <div>
-            <label class="text-[10px] font-bold text-slate-600 block mb-1 uppercase tracking-wider">Total Sessions</label>
-            <input id="att-total" type="number" value="30" class="w-full text-xs p-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 outline-none focus:border-[#8C1D24]">
+            <label class="text-[10px] font-bold text-slate-400 block mb-1 uppercase tracking-wider">Total Sessions</label>
+            <input id="att-total" type="number" value="30" class="w-full text-xs p-2 bg-slate-950 border border-white/10 rounded-lg text-white outline-none focus:border-red-500">
           </div>
           <div>
-            <label class="text-[10px] font-bold text-slate-600 block mb-1 uppercase tracking-wider">Classes Missed</label>
-            <input id="att-missed" type="number" value="4" min="0" class="w-full text-xs p-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 outline-none focus:border-[#8C1D24]">
+            <label class="text-[10px] font-bold text-slate-400 block mb-1 uppercase tracking-wider">Classes Missed</label>
+            <input id="att-missed" type="number" value="4" min="0" class="w-full text-xs p-2 bg-slate-950 border border-white/10 rounded-lg text-white outline-none focus:border-red-500">
           </div>
         </div>
 
@@ -377,16 +354,16 @@
       </div>
 
       <!-- GPA ESTIMATOR -->
-      <div class="glass-card p-4 rounded-2xl border border-slate-200 bg-white">
+      <div class="glass-card p-4 rounded-2xl border border-white/10 bg-[#111827] shadow-lg">
         <div class="flex items-center justify-between mb-3">
           <div class="flex items-center gap-2.5">
-            <span class="p-2 bg-amber-50 text-amber-800 border border-amber-200 rounded-xl text-xs font-bold">🎓</span>
+            <span class="p-2 bg-amber-950/80 text-amber-300 border border-amber-500/40 rounded-xl text-xs font-bold">🎓</span>
             <div>
-              <h3 class="font-bold text-xs sm:text-sm text-slate-900">AU GPA / SGPA Calculator (4.00 Scale)</h3>
-              <p class="text-[11px] text-slate-500">Estimate semester performance on AU grade points</p>
+              <h3 class="font-bold text-xs sm:text-sm text-white">AU GPA / SGPA Calculator (4.00 Scale)</h3>
+              <p class="text-[11px] text-slate-400">Estimate semester performance on AU grade points</p>
             </div>
           </div>
-          <button id="add-course-btn" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-xs font-bold rounded-lg text-slate-800 transition-all active:scale-95 border border-slate-200">
+          <button id="add-course-btn" class="px-2.5 py-1 bg-white/10 hover:bg-white/20 text-xs font-bold rounded-lg text-white transition-all active:scale-95 border border-white/10">
             + Add Course
           </button>
         </div>
@@ -396,16 +373,16 @@
       </div>
 
       <!-- ACADEMIC CALENDAR -->
-      <div class="glass-card p-4 rounded-2xl border border-slate-200 bg-white">
+      <div class="glass-card p-4 rounded-2xl border border-white/10 bg-[#111827] shadow-lg">
         <div class="flex items-center justify-between mb-3">
           <div class="flex items-center gap-2.5">
-            <span class="p-2 bg-red-50 text-[#8C1D24] border border-red-200 rounded-xl text-xs font-bold">📅</span>
+            <span class="p-2 bg-red-950/80 text-red-300 border border-red-500/40 rounded-xl text-xs font-bold">📅</span>
             <div>
-              <h3 class="font-bold text-xs sm:text-sm text-slate-900">Academic Calendar (2026–2027)</h3>
-              <p class="text-[11px] text-slate-500">Official semester milestones, exams & breaks</p>
+              <h3 class="font-bold text-xs sm:text-sm text-white">Academic Calendar (2026–2027)</h3>
+              <p class="text-[11px] text-slate-400">Official semester milestones, exams & breaks</p>
             </div>
           </div>
-          <select id="sem-filter" class="text-xs px-2.5 py-1 bg-slate-50 border border-slate-200 rounded-lg text-slate-800 outline-none">
+          <select id="sem-filter" class="text-xs px-2.5 py-1 bg-slate-950 border border-white/10 rounded-lg text-white outline-none">
             <option value="monsoon2026">Monsoon 2026</option>
             <option value="winter2027">Winter 2027</option>
             <option value="summer2027">Summer 2027</option>
@@ -420,82 +397,82 @@
   </main>
 
   <!-- MOBILE BOTTOM NAVIGATION -->
-  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 glass-nav px-3 py-1.5 flex items-center justify-around shadow-md bottom-nav">
+  <nav class="md:hidden shrink-0 z-40 glass-nav px-3 py-1.5 flex items-center justify-around shadow-lg border-t border-white/10">
     <button data-tab="chat" class="nav-btn active-tab flex flex-col items-center gap-0.5 text-[11px] p-1 transition-all">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
       <span>AUGI</span>
     </button>
 
-    <button data-tab="map" class="nav-btn flex flex-col items-center gap-0.5 text-slate-500 text-[11px] p-1 transition-all">
+    <button data-tab="map" class="nav-btn flex flex-col items-center gap-0.5 text-slate-400 text-[11px] p-1 transition-all">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
       <span>Map</span>
     </button>
 
-    <button data-tab="directory" class="nav-btn flex flex-col items-center gap-0.5 text-slate-500 text-[11px] p-1 transition-all">
+    <button data-tab="directory" class="nav-btn flex flex-col items-center gap-0.5 text-slate-400 text-[11px] p-1 transition-all">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
       <span>Advisors</span>
     </button>
 
-    <button data-tab="tools" class="nav-btn flex flex-col items-center gap-0.5 text-slate-500 text-[11px] p-1 transition-all">
+    <button data-tab="tools" class="nav-btn flex flex-col items-center gap-0.5 text-slate-400 text-[11px] p-1 transition-all">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
       <span>Tools</span>
     </button>
   </nav>
 
   <!-- EMERGENCY SOS MODAL -->
-  <div id="sos-modal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-3 sm:p-4">
-    <div class="modal-anim glass-card w-full max-w-md rounded-3xl p-5 border border-red-200 shadow-2xl space-y-3.5 max-h-[90vh] overflow-y-auto bg-white">
-      <div class="flex items-center justify-between pb-2.5 border-b border-slate-100">
-        <div class="flex items-center gap-2 text-[#8C1D24]">
-          <span class="w-2.5 h-2.5 rounded-full bg-red-600 animate-ping"></span>
-          <h2 class="font-black text-sm sm:text-base tracking-tight">Campus Emergency SOS</h2>
+  <div id="sos-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-end sm:items-center justify-center p-3 sm:p-4">
+    <div class="modal-anim glass-card w-full max-w-md rounded-3xl p-5 border border-red-500/40 shadow-2xl space-y-3.5 max-h-[90vh] overflow-y-auto bg-[#111827]">
+      <div class="flex items-center justify-between pb-2.5 border-b border-white/10">
+        <div class="flex items-center gap-2 text-red-400">
+          <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping"></span>
+          <h2 class="font-black text-sm sm:text-base tracking-tight text-white">Campus Emergency SOS</h2>
         </div>
-        <button id="close-sos-btn" class="text-slate-400 hover:text-slate-700 p-1 rounded-xl hover:bg-slate-100 transition-colors">
+        <button id="close-sos-btn" class="text-slate-400 hover:text-white p-1 rounded-xl hover:bg-white/10 transition-colors">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
       </div>
 
-      <p class="text-xs text-slate-500">Tap to dial immediately or send an emergency report:</p>
+      <p class="text-xs text-slate-400">Tap to dial immediately or send an emergency report:</p>
 
       <div class="space-y-2">
-        <a href="tel:+919998800237" class="flex items-center justify-between p-3 bg-red-50 hover:bg-red-100 border border-red-200 rounded-xl transition-all">
+        <a href="tel:+919998800237" class="flex items-center justify-between p-3 bg-red-950/50 hover:bg-red-950/80 border border-red-500/40 rounded-xl transition-all">
           <div>
-            <h4 class="font-bold text-xs text-red-950">Campus Security Supervisor (24h)</h4>
-            <p class="text-[11px] text-[#8C1D24] font-mono mt-0.5 font-bold">+91.9998800237</p>
+            <h4 class="font-bold text-xs text-red-200">Campus Security Supervisor (24h)</h4>
+            <p class="text-[11px] text-red-300 font-mono mt-0.5 font-bold">+91.9998800237</p>
           </div>
-          <span class="px-2.5 py-1 bg-[#8C1D24] hover:bg-[#6E1218] text-white rounded-lg text-xs font-bold shadow-xs">Call 24/7</span>
+          <span class="px-2.5 py-1 bg-red-600 hover:bg-red-500 text-white rounded-lg text-xs font-bold shadow-xs">Call 24/7</span>
         </a>
 
-        <a href="tel:+9107961911026" class="flex items-center justify-between p-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-all">
+        <a href="tel:+9107961911026" class="flex items-center justify-between p-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl transition-all">
           <div>
-            <h4 class="font-bold text-xs text-slate-900">University Doctor (Dr. Gayatri Raval)</h4>
-            <p class="text-[11px] text-slate-500 mt-0.5">Health Centre, 1st Floor UC</p>
+            <h4 class="font-bold text-xs text-white">University Doctor (Dr. Gayatri Raval)</h4>
+            <p class="text-[11px] text-slate-400 mt-0.5">Health Centre, 1st Floor UC</p>
           </div>
-          <span class="px-2.5 py-1 bg-slate-800 hover:bg-slate-900 text-white rounded-lg text-xs font-bold">Call</span>
+          <span class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-xs font-bold border border-white/10">Call</span>
         </a>
 
-        <a href="tel:18001805522" class="flex items-center justify-between p-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-all">
+        <a href="tel:18001805522" class="flex items-center justify-between p-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl transition-all">
           <div>
-            <h4 class="font-bold text-xs text-slate-900">Anti-Ragging Helpline (Toll-Free)</h4>
-            <p class="text-[11px] text-slate-500 font-mono mt-0.5">1800.180.5522</p>
+            <h4 class="font-bold text-xs text-white">Anti-Ragging Helpline (Toll-Free)</h4>
+            <p class="text-[11px] text-slate-400 font-mono mt-0.5">1800.180.5522</p>
           </div>
-          <span class="px-2.5 py-1 bg-slate-800 hover:bg-slate-900 text-white rounded-lg text-xs font-bold">Call</span>
+          <span class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-xs font-bold border border-white/10">Call</span>
         </a>
 
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=posh@ahduni.edu.in&su=Confidential%20Inquiry%20-%20POSH" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-all">
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=posh@ahduni.edu.in&su=Confidential%20Inquiry%20-%20POSH" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl transition-all">
           <div>
-            <h4 class="font-bold text-xs text-slate-900">POSH (Internal Complaints)</h4>
-            <p class="text-[11px] text-slate-500 font-mono mt-0.5">posh@ahduni.edu.in</p>
+            <h4 class="font-bold text-xs text-white">POSH (Internal Complaints)</h4>
+            <p class="text-[11px] text-slate-400 font-mono mt-0.5">posh@ahduni.edu.in</p>
           </div>
-          <span class="px-2.5 py-1 bg-slate-800 hover:bg-slate-900 text-white rounded-lg text-xs font-bold">Gmail</span>
+          <span class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-xs font-bold border border-white/10">Gmail</span>
         </a>
 
-        <a href="tel:108" class="flex items-center justify-between p-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-all">
+        <a href="tel:108" class="flex items-center justify-between p-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl transition-all">
           <div>
-            <h4 class="font-bold text-xs text-slate-900">Emergency Ambulance</h4>
-            <p class="text-[11px] text-slate-500 font-mono mt-0.5">108</p>
+            <h4 class="font-bold text-xs text-white">Emergency Ambulance</h4>
+            <p class="text-[11px] text-slate-400 font-mono mt-0.5">108</p>
           </div>
-          <span class="px-2.5 py-1 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-bold">Call</span>
+          <span class="px-2.5 py-1 bg-red-600 hover:bg-red-500 text-white rounded-lg text-xs font-bold">Call</span>
         </a>
       </div>
     </div>

@@ -1,124 +1,134 @@
-/* AUGI - Ahmedabad University Campus Map & UI Stylesheet */
+/* AUGI - Ahmedabad University Black & Crimson Red Theme */
 
 :root {
   --au-crimson: #8C1D24;
   --au-crimson-dark: #6E1218;
-  --au-crimson-light: #A82A33;
-  --au-crimson-soft: #FDF2F2;
-  --au-crimson-border: #FECACA;
+  --au-crimson-light: #C5222B;
+  --au-crimson-soft: rgba(140, 29, 36, 0.15);
+  --au-crimson-glow: rgba(197, 34, 43, 0.35);
   --au-gold: #D97706;
-  --border-color: #E2E8F0;
-  --border-highlight: #CBD5E1;
-  --text-main: #0F172A;
+  
+  /* Black & Dark Slate Palette */
+  --bg-primary: #070A10;
+  --bg-secondary: #0D121D;
+  --bg-card: #111827;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-crimson: rgba(140, 29, 36, 0.4);
+  --text-main: #FFFFFF;
+  --text-muted: #94A3B8;
+  --text-subtle: #64748B;
 }
 
-body {
-  background-color: #F8FAFC;
+/* Strict App-Shell Height Lock (Prevents any window scroll/jump) */
+html, body {
+  height: 100%;
+  height: 100dvh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--bg-primary);
   color: var(--text-main);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Glass surfaces */
+/* Black & Crimson Glass Header */
 .glass-header {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(10, 14, 23, 0.94);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-color);
 }
 
 .glass-nav {
-  background: rgba(255, 255, 255, 0.96);
+  background: rgba(10, 14, 23, 0.96);
   backdrop-filter: blur(20px);
   border-top: 1px solid var(--border-color);
 }
 
 .glass-card {
-  background: #FFFFFF;
+  background: var(--bg-card);
   border: 1px solid var(--border-color);
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-}
-.glass-card:hover {
-  border-color: #CBD5E1;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
 
-/* Tabs */
+/* Tab Switching */
 .tab-content {
   display: none;
-  opacity: 0;
-  transform: translateY(4px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  height: 100%;
+  width: 100%;
 }
 .tab-content.active {
   display: flex;
-  opacity: 1;
-  transform: translateY(0);
-}
-#tab-tools.active, #tab-directory.active, #tab-map.active {
-  display: block;
+  flex-direction: column;
 }
 
 /* Chat bubble styling */
 .chat-bubble-user {
-  background: linear-gradient(135deg, #8C1D24 0%, #A82A33 100%);
+  background: linear-gradient(135deg, #8C1D24 0%, #BA242C 100%);
   color: #FFFFFF;
-  border-radius: 18px 18px 4px 18px;
+  border-radius: 16px 16px 4px 16px;
+  box-shadow: 0 4px 14px var(--au-crimson-glow);
 }
 
 .chat-bubble-augi {
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  color: #0F172A;
-  border-radius: 18px 18px 18px 4px;
+  background: #111827;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #F8FAFC;
+  border-radius: 16px 16px 16px 4px;
 }
 
 .chip-btn {
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  color: #334155;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #E2E8F0;
   transition: all 0.15s ease;
 }
 .chip-btn:hover {
-  background: #FDF2F2;
-  border-color: #FECDD3;
-  color: #8C1D24;
+  background: rgba(140, 29, 36, 0.25);
+  border-color: rgba(197, 34, 43, 0.6);
+  color: #FFFFFF;
 }
 
-/* ========================================================= */
-/* HIGH-LEGIBILITY LARGE CAMPUS MAP STYLING                  */
-/* ========================================================= */
-
+/* Map Building Elements */
 .map-building {
   cursor: pointer;
   transition: transform 0.15s ease, filter 0.15s ease;
   transform-origin: center;
 }
-
 .map-building:hover {
-  filter: drop-shadow(0 4px 12px rgba(15, 23, 42, 0.15));
+  filter: drop-shadow(0 4px 12px rgba(197, 34, 43, 0.4));
 }
-
-/* Selected state: Clean blue focus ring with high text contrast */
 .map-building.selected rect.bldg-card {
-  stroke: #2563EB !important;
+  stroke: #F59E0B !important;
   stroke-width: 4 !important;
-  filter: drop-shadow(0 4px 14px rgba(37, 99, 235, 0.3));
+  filter: drop-shadow(0 4px 14px rgba(245, 158, 11, 0.4));
 }
 
 .gate-marker {
   cursor: pointer;
-  transition: transform 0.15s ease, filter 0.15s ease;
+  transition: transform 0.15s ease;
 }
 .gate-marker:hover {
   transform: scale(1.25);
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
 }
 
-/* Nav button active pill */
-.nav-btn {
-  transition: color 0.2s ease;
+/* Custom Scrollbars inside scrollable tab panes */
+.pane-scroll::-webkit-scrollbar {
+  width: 4px;
 }
+.pane-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.pane-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+.pane-scroll::-webkit-scrollbar-thumb:hover {
+  background: #C5222B;
+}
+
+/* Navigation active tab */
 .nav-btn.active-tab {
-  color: #8C1D24 !important;
+  color: #EF4444 !important;
   font-weight: 700;
 }

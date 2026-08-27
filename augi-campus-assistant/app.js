@@ -1,4 +1,4 @@
-// AUGI - Ahmedabad University AI Assistant Main Engine (Instant No-Scroll View & Red/White Theme)
+// AUGI - Ahmedabad University AI Assistant Engine (Black & Crimson Red Theme)
 
 document.addEventListener("DOMContentLoaded", () => {
   const data = window.AUGI_DATA;
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         recognition.start();
         isListening = true;
-        voiceBtn.classList.add("text-[#8C1D24]", "animate-pulse");
+        voiceBtn.classList.add("text-red-500", "animate-pulse");
       } catch (e) {
         stopVoice();
       }
@@ -73,13 +73,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function stopVoice() {
     isListening = false;
     if (voiceBtn) {
-      voiceBtn.classList.remove("text-[#8C1D24]", "animate-pulse");
+      voiceBtn.classList.remove("text-red-500", "animate-pulse");
     }
   }
 
   if (voiceBtn) voiceBtn.addEventListener("click", toggleVoice);
 
-  // Tab Navigation with Instant Viewport Reset (No Scroll Lag)
+  // Tab Navigation with Zero-Scroll Locked Viewport
   function switchTab(tabId) {
     currentTab = tabId;
     tabContents.forEach(el => {
@@ -92,18 +92,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     tabButtons.forEach(btn => {
       if (btn.dataset.tab === tabId) {
-        btn.classList.add("active-tab", "text-[#8C1D24]", "font-bold");
+        btn.classList.add("active-tab", "text-red-500", "font-bold");
         btn.classList.remove("text-slate-400", "text-slate-500", "text-slate-600");
       } else {
-        btn.classList.remove("active-tab", "text-[#8C1D24]", "font-bold");
-        btn.classList.add("text-slate-500");
+        btn.classList.remove("active-tab", "text-red-500", "font-bold");
+        btn.classList.add("text-slate-400");
       }
     });
-
-    // Instant reset scroll to absolute top
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
   }
 
   tabButtons.forEach(btn => {
@@ -137,17 +132,17 @@ document.addEventListener("DOMContentLoaded", () => {
       let cardHtml = "";
       if (msg.locationCard) {
         cardHtml = `
-          <div class="mt-3 p-3.5 bg-slate-50 border border-slate-200 rounded-2xl text-xs space-y-2 shadow-xs">
-            <div class="flex items-center justify-between font-bold text-slate-900">
+          <div class="mt-3 p-3.5 bg-[#0D121D] border border-white/10 rounded-2xl text-xs space-y-2 shadow-md">
+            <div class="flex items-center justify-between font-bold text-white">
               <span class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-[#8C1D24]"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
                 ${msg.locationCard.name}
               </span>
-              <span class="text-[10px] font-bold px-2 py-0.5 bg-amber-50 text-amber-800 border border-amber-200 rounded-full">${msg.locationCard.campus}</span>
+              <span class="text-[10px] font-bold px-2 py-0.5 bg-amber-950/80 text-amber-300 border border-amber-500/40 rounded-full">${msg.locationCard.campus}</span>
             </div>
-            <p class="text-slate-600">${msg.locationCard.description}</p>
-            <div class="text-[11px] text-slate-500"><strong>Nearest Gate:</strong> ${msg.locationCard.nearestGate}</div>
-            <button onclick="window.viewLocationOnMap('${msg.locationCard.id}')" class="w-full py-2 bg-gradient-to-r from-[#8C1D24] to-[#A82A33] hover:from-[#6E1218] hover:to-[#8C1D24] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all shadow-xs active:scale-98">
+            <p class="text-slate-300">${msg.locationCard.description}</p>
+            <div class="text-[11px] text-slate-400"><strong>Nearest Gate:</strong> ${msg.locationCard.nearestGate}</div>
+            <button onclick="window.viewLocationOnMap('${msg.locationCard.id}')" class="w-full py-2 bg-gradient-to-r from-[#8C1D24] to-[#C5222B] hover:from-[#6E1218] hover:to-[#8C1D24] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all shadow-md active:scale-98 border border-red-500/30">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
               View on Campus Map
             </button>
@@ -158,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let chipsHtml = "";
       if (msg.chips && msg.chips.length > 0 && index === chatMessages.length - 1) {
         chipsHtml = `
-          <div class="flex flex-wrap gap-2 mt-3 pt-2 border-t border-slate-100">
+          <div class="flex flex-wrap gap-2 mt-3 pt-2 border-t border-white/10">
             ${msg.chips.map(chip => `
               <button onclick="window.quickSend('${chip.replace(/'/g, "\\'")}')" class="chip-btn text-xs px-3 py-1.5 rounded-full font-medium shadow-xs">
                 ${chip}
@@ -172,22 +167,22 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="flex flex-col ${isUser ? 'items-end' : 'items-start'} mb-2.5 msg-anim">
           <div class="flex items-start gap-2.5 max-w-[92%] md:max-w-[82%]">
             ${!isUser ? `
-              <div class="w-8 h-8 rounded-2xl bg-gradient-to-br from-[#8C1D24] to-[#A82A33] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-xs border border-red-200">
+              <div class="w-8 h-8 rounded-2xl bg-gradient-to-br from-[#8C1D24] to-[#C5222B] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-md border border-red-500/30">
                 AU
               </div>
             ` : ''}
             <div class="${isUser ? 'chat-bubble-user px-4 py-2.5' : 'chat-bubble-augi px-4 py-3'}">
-              <div class="text-xs sm:text-sm leading-relaxed ${isUser ? 'text-white' : 'text-slate-800'}">
+              <div class="text-xs sm:text-sm leading-relaxed ${isUser ? 'text-white' : 'text-slate-100'}">
                 ${formattedText}
               </div>
               ${cardHtml}
               ${chipsHtml}
-              <div class="text-[10px] mt-1.5 ${isUser ? 'text-red-100 text-right' : 'text-slate-400'}">
+              <div class="text-[10px] mt-1.5 ${isUser ? 'text-red-200 text-right' : 'text-slate-400'}">
                 ${msg.time}
               </div>
             </div>
             ${isUser ? `
-              <div class="w-8 h-8 rounded-2xl bg-slate-700 text-white flex items-center justify-center text-xs font-bold shrink-0 shadow-xs">
+              <div class="w-8 h-8 rounded-2xl bg-slate-800 text-white flex items-center justify-center text-xs font-bold shrink-0 shadow-md border border-white/10">
                 You
               </div>
             ` : ''}
@@ -201,9 +196,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function formatMarkdown(text) {
     return text
-      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-slate-900">$1</strong>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-white">$1</strong>')
       .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>')
-      .replace(/`(.*?)`/g, '<code class="px-1.5 py-0.5 bg-red-50 text-[#8C1D24] border border-red-200 rounded text-xs font-mono">$1</code>')
+      .replace(/`(.*?)`/g, '<code class="px-1.5 py-0.5 bg-red-950/80 text-red-300 border border-red-500/40 rounded text-xs font-mono">$1</code>')
       .replace(/\n\n/g, '<br/><br/>')
       .replace(/\n/g, '<br/>');
   }
@@ -424,7 +419,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // -------------------------------------------------------------
-  // MAP TAB LOGIC
+  // MAP TAB LOGIC (Black & Crimson Red)
   // -------------------------------------------------------------
   const mapSvg = document.getElementById("campus-map-svg");
   const buildingDetailsCard = document.getElementById("building-details");
@@ -462,27 +457,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (buildingDetailsCard) {
       buildingDetailsCard.innerHTML = `
-        <div class="glass-card p-4 rounded-2xl border border-slate-200 shadow-xs modal-anim bg-white">
+        <div class="glass-card p-4 rounded-2xl border border-white/10 shadow-lg modal-anim bg-[#111827]">
           <div class="flex items-start justify-between">
             <div>
               <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-[#8C1D24]"></span>
-                <h3 class="font-bold text-sm text-slate-900">${bldg.name}</h3>
+                <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
+                <h3 class="font-bold text-sm text-white">${bldg.name}</h3>
               </div>
-              <p class="text-[11px] text-[#8C1D24] font-semibold mt-0.5">${bldg.campus} • Nearest: ${bldg.nearestGate}</p>
+              <p class="text-[11px] text-red-400 font-semibold mt-0.5">${bldg.campus} • Nearest: ${bldg.nearestGate}</p>
             </div>
-            <button onclick="window.askAugiAboutLocation('${bldg.name}')" class="px-2.5 py-1 bg-red-50 hover:bg-red-100 text-[#8C1D24] text-[11px] font-bold rounded-lg border border-red-200 flex items-center gap-1 transition-all">
+            <button onclick="window.askAugiAboutLocation('${bldg.name}')" class="px-2.5 py-1 bg-red-950/80 hover:bg-red-900 text-red-300 text-[11px] font-bold rounded-lg border border-red-500/40 flex items-center gap-1 transition-all">
               💬 Ask
             </button>
           </div>
-          <p class="text-[11px] text-slate-600 mt-2 leading-relaxed">${bldg.description}</p>
-          <div class="mt-3 pt-2.5 border-t border-slate-100">
-            <h4 class="text-[10px] font-bold text-slate-700 mb-1.5 uppercase tracking-wider">Floor Directory:</h4>
-            <div class="space-y-1.5 max-h-40 overflow-y-auto pr-1">
+          <p class="text-[11px] text-slate-300 mt-2 leading-relaxed">${bldg.description}</p>
+          <div class="mt-3 pt-2.5 border-t border-white/10">
+            <h4 class="text-[10px] font-bold text-slate-400 mb-1.5 uppercase tracking-wider">Floor Directory:</h4>
+            <div class="space-y-1.5 max-h-40 overflow-y-auto pane-scroll pr-1">
               ${bldg.floors.map(f => `
-                <div class="text-[11px] bg-slate-50 p-2 rounded-lg border border-slate-200">
-                  <span class="font-bold text-slate-900">${f.floor}:</span>
-                  <span class="text-slate-600"> ${f.facilities.join(", ")}</span>
+                <div class="text-[11px] bg-white/5 p-2 rounded-lg border border-white/5">
+                  <span class="font-bold text-white">${f.floor}:</span>
+                  <span class="text-slate-300"> ${f.facilities.join(", ")}</span>
                 </div>
               `).join("")}
             </div>
@@ -495,14 +490,14 @@ document.addEventListener("DOMContentLoaded", () => {
   function selectGate(gate) {
     if (buildingDetailsCard) {
       buildingDetailsCard.innerHTML = `
-        <div class="glass-card p-4 rounded-2xl border border-slate-200 shadow-xs modal-anim bg-white">
+        <div class="glass-card p-4 rounded-2xl border border-white/10 shadow-lg modal-anim bg-[#111827]">
           <div class="flex items-center gap-2.5">
-            <span class="w-7 h-7 rounded-xl bg-[#D97706] text-white font-black text-xs flex items-center justify-center shadow-xs">${gate.num}</span>
-            <h3 class="font-bold text-xs sm:text-sm text-slate-900">${gate.name}</h3>
+            <span class="w-7 h-7 rounded-xl bg-amber-500 text-black font-black text-xs flex items-center justify-center shadow-md">${gate.num}</span>
+            <h3 class="font-bold text-xs sm:text-sm text-white">${gate.name}</h3>
           </div>
-          <p class="text-[11px] text-slate-600 mt-2 leading-relaxed">${gate.desc}</p>
-          <p class="text-[11px] text-[#8C1D24] mt-1 font-bold">Zone: ${gate.campus}</p>
-          <button onclick="window.askAugiAboutLocation('How do I enter from Gate ${gate.num}?')" class="w-full mt-3 py-1.5 bg-gradient-to-r from-[#8C1D24] to-[#A82A33] text-white text-xs font-bold rounded-lg shadow-xs transition-all active:scale-98">
+          <p class="text-[11px] text-slate-300 mt-2 leading-relaxed">${gate.desc}</p>
+          <p class="text-[11px] text-red-400 mt-1 font-bold">Zone: ${gate.campus}</p>
+          <button onclick="window.askAugiAboutLocation('How do I enter from Gate ${gate.num}?')" class="w-full mt-3 py-1.5 bg-gradient-to-r from-[#8C1D24] to-[#C5222B] text-white text-xs font-bold rounded-lg shadow-md transition-all active:scale-98 border border-red-500/30">
             Get Directions from Gate ${gate.num}
           </button>
         </div>
@@ -526,7 +521,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // -------------------------------------------------------------
-  // DIRECTORY TAB LOGIC
+  // DIRECTORY TAB LOGIC (Black & Crimson Red)
   // -------------------------------------------------------------
   const directoryContainer = document.getElementById("directory-list");
   const directorySearchInput = document.getElementById("directory-search");
@@ -551,23 +546,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
       html += `
         <div class="mb-4">
-          <h3 class="text-[11px] font-black text-[#8C1D24] uppercase tracking-widest mb-2 px-1 flex items-center gap-1.5">
-            <span class="w-2 h-2 rounded-full bg-[#8C1D24]"></span>
+          <h3 class="text-[11px] font-black text-red-400 uppercase tracking-widest mb-2 px-1 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-red-500"></span>
             ${group.school}
           </h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5">
             ${filteredProgs.map(p => `
-              <div class="glass-card p-3.5 rounded-xl border border-slate-200 bg-white flex flex-col justify-between shadow-xs">
+              <div class="glass-card p-3.5 rounded-xl border border-white/10 bg-[#111827] flex flex-col justify-between shadow-md">
                 <div>
-                  <h4 class="font-bold text-xs text-slate-900">${p.degree}</h4>
-                  <div class="mt-2 text-[11px] text-slate-600 space-y-0.5">
-                    <div><span class="text-slate-400">Major Advisor:</span> <strong class="text-slate-900">${p.advisor}</strong></div>
-                    <div><span class="text-slate-400">Chair:</span> ${p.chair}</div>
-                    <div><span class="text-slate-400">Manager:</span> ${p.manager}</div>
+                  <h4 class="font-bold text-xs text-white">${p.degree}</h4>
+                  <div class="mt-2 text-[11px] text-slate-300 space-y-0.5">
+                    <div><span class="text-slate-500">Major Advisor:</span> <strong class="text-white">${p.advisor}</strong></div>
+                    <div><span class="text-slate-500">Chair:</span> ${p.chair}</div>
+                    <div><span class="text-slate-500">Manager:</span> ${p.manager}</div>
                   </div>
                 </div>
-                <div class="mt-3 pt-2.5 border-t border-slate-100 flex items-center gap-2">
-                  <a href="https://mail.google.com/mail/?view=cm&fs=1&to=${p.advisorEmail}&su=${encodeURIComponent('Academic Query - ' + p.degree)}" target="_blank" rel="noopener noreferrer" class="flex-1 py-1.5 bg-red-50 hover:bg-red-100 text-[#8C1D24] font-bold text-center rounded-lg text-xs border border-red-200 flex items-center justify-center gap-1.5 transition-all">
+                <div class="mt-3 pt-2.5 border-t border-white/10 flex items-center gap-2">
+                  <a href="https://mail.google.com/mail/?view=cm&fs=1&to=${p.advisorEmail}&su=${encodeURIComponent('Academic Query - ' + p.degree)}" target="_blank" rel="noopener noreferrer" class="flex-1 py-1.5 bg-red-950/60 hover:bg-red-900 text-red-200 font-bold text-center rounded-lg text-xs border border-red-500/40 flex items-center justify-center gap-1.5 transition-all">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                     Email on Gmail
                   </a>
@@ -579,7 +574,7 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     });
 
-    directoryContainer.innerHTML = html || `<div class="text-center py-8 text-slate-400 text-xs">No advisors found matching your query.</div>`;
+    directoryContainer.innerHTML = html || `<div class="text-center py-8 text-slate-500 text-xs">No advisors found matching your query.</div>`;
   }
 
   if (directorySearchInput) {
@@ -595,7 +590,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // -------------------------------------------------------------
-  // STUDENT TOOLS: ATTENDANCE CALCULATOR & GPA
+  // STUDENT TOOLS: ATTENDANCE & GPA
   // -------------------------------------------------------------
   const creditSelect = document.getElementById("att-credits");
   const totalClassesInput = document.getElementById("att-total");
@@ -625,12 +620,12 @@ document.addEventListener("DOMContentLoaded", () => {
     let statusHtml = "";
     if (percentage >= 75) {
       statusHtml = `
-        <div class="p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-950">
+        <div class="p-3.5 bg-emerald-950/40 border border-emerald-500/40 rounded-xl text-emerald-200">
           <div class="flex items-center justify-between font-bold text-xs sm:text-sm">
-            <span class="text-emerald-800">✅ Status: Safe (No Penalty)</span>
-            <span class="text-lg font-black text-emerald-700">${percentage}%</span>
+            <span class="text-emerald-400">✅ Status: Safe (No Penalty)</span>
+            <span class="text-lg font-black text-emerald-300">${percentage}%</span>
           </div>
-          <p class="text-[11px] mt-1 text-emerald-700">
+          <p class="text-[11px] mt-1 text-emerald-300/80">
             ${remainingSafe > 0 
               ? `You can still miss <strong>${remainingSafe}</strong> more class${remainingSafe > 1 ? 'es' : ''} without grade penalty.` 
               : `You have reached the maximum safe absences (${maxSafe}). Any more absence will trigger a grade drop!`}
@@ -639,24 +634,24 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     } else if (percentage >= 60) {
       statusHtml = `
-        <div class="p-3.5 bg-amber-50 border border-amber-200 rounded-xl text-amber-950">
+        <div class="p-3.5 bg-amber-950/40 border border-amber-500/40 rounded-xl text-amber-200">
           <div class="flex items-center justify-between font-bold text-xs sm:text-sm">
-            <span class="text-amber-800">⚠️ Status: 1 Grade Drop Applied</span>
-            <span class="text-lg font-black text-amber-700">${percentage}%</span>
+            <span class="text-amber-400">⚠️ Status: 1 Grade Drop Applied</span>
+            <span class="text-lg font-black text-amber-300">${percentage}%</span>
           </div>
-          <p class="text-[11px] mt-1 text-amber-700">
+          <p class="text-[11px] mt-1 text-amber-300/80">
             Attendance is between 60% and 74%. Your final letter grade will be reduced by 1 notch (e.g. A ➔ A-, B ➔ B-, B- ➔ C+).
           </p>
         </div>
       `;
     } else {
       statusHtml = `
-        <div class="p-3.5 bg-red-50 border border-red-200 rounded-xl text-red-950">
+        <div class="p-3.5 bg-red-950/40 border border-red-500/40 rounded-xl text-red-200">
           <div class="flex items-center justify-between font-bold text-xs sm:text-sm">
-            <span class="text-red-800">⛔ Status: 'NP' (Not Passed) Grade</span>
-            <span class="text-lg font-black text-red-700">${percentage}%</span>
+            <span class="text-red-400">⛔ Status: 'NP' (Not Passed) Grade</span>
+            <span class="text-lg font-black text-red-300">${percentage}%</span>
           </div>
-          <p class="text-[11px] mt-1 text-red-700">
+          <p class="text-[11px] mt-1 text-red-300/80">
             Attendance has fallen below 60%. As per AU regulations, you will receive an 'NP' grade and must repeat the course.
           </p>
         </div>
@@ -667,17 +662,17 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="space-y-2.5">
         ${statusHtml}
         <div class="grid grid-cols-3 gap-2 text-center text-xs">
-          <div class="p-2 bg-slate-50 rounded-xl border border-slate-200">
-            <span class="text-slate-500 block text-[9px] uppercase font-bold tracking-wider">Total</span>
-            <strong class="text-slate-900 text-sm">${total}</strong>
+          <div class="p-2 bg-white/5 rounded-xl border border-white/10">
+            <span class="text-slate-400 block text-[9px] uppercase font-bold tracking-wider">Total</span>
+            <strong class="text-white text-sm">${total}</strong>
           </div>
-          <div class="p-2 bg-slate-50 rounded-xl border border-slate-200">
-            <span class="text-slate-500 block text-[9px] uppercase font-bold tracking-wider">Attended</span>
-            <strong class="text-emerald-600 text-sm">${attended}</strong>
+          <div class="p-2 bg-white/5 rounded-xl border border-white/10">
+            <span class="text-slate-400 block text-[9px] uppercase font-bold tracking-wider">Attended</span>
+            <strong class="text-emerald-400 text-sm">${attended}</strong>
           </div>
-          <div class="p-2 bg-slate-50 rounded-xl border border-slate-200">
-            <span class="text-slate-500 block text-[9px] uppercase font-bold tracking-wider">Safe Limit</span>
-            <strong class="text-slate-900 text-sm">≤ ${maxSafe}</strong>
+          <div class="p-2 bg-white/5 rounded-xl border border-white/10">
+            <span class="text-slate-400 block text-[9px] uppercase font-bold tracking-wider">Safe Limit</span>
+            <strong class="text-white text-sm">≤ ${maxSafe}</strong>
           </div>
         </div>
       </div>
@@ -696,7 +691,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (missedClassesInput) missedClassesInput.addEventListener("input", calculateAttendance);
 
   // -------------------------------------------------------------
-  // GPA CALCULATOR ENGINE
+  // GPA CALCULATOR ENGINE (Black & Crimson Red)
   // -------------------------------------------------------------
   let gpaCourses = [
     { name: "Course 1", credits: 3, grade: "A" },
@@ -712,21 +707,21 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderGpaCourses() {
     if (!gpaCourseList) return;
     gpaCourseList.innerHTML = gpaCourses.map((c, i) => `
-      <div class="flex items-center gap-2 p-1.5 bg-slate-50 rounded-xl border border-slate-200">
-        <input type="text" value="${c.name}" onchange="window.updateGpaCourse(${i}, 'name', this.value)" class="flex-1 text-xs px-2.5 py-1.5 rounded-lg border border-slate-200 bg-white text-slate-900 outline-none">
-        <select onchange="window.updateGpaCourse(${i}, 'credits', parseFloat(this.value))" class="text-xs px-2 py-1.5 rounded-lg border border-slate-200 bg-white text-slate-900 outline-none">
+      <div class="flex items-center gap-2 p-1.5 bg-white/5 rounded-xl border border-white/10">
+        <input type="text" value="${c.name}" onchange="window.updateGpaCourse(${i}, 'name', this.value)" class="flex-1 text-xs px-2.5 py-1.5 rounded-lg border border-white/10 bg-slate-950 text-white outline-none">
+        <select onchange="window.updateGpaCourse(${i}, 'credits', parseFloat(this.value))" class="text-xs px-2 py-1.5 rounded-lg border border-white/10 bg-slate-950 text-white outline-none">
           <option value="1" ${c.credits === 1 ? 'selected' : ''}>1 Cr</option>
           <option value="1.5" ${c.credits === 1.5 ? 'selected' : ''}>1.5 Cr</option>
           <option value="2" ${c.credits === 2 ? 'selected' : ''}>2 Cr</option>
           <option value="3" ${c.credits === 3 ? 'selected' : ''}>3 Cr</option>
           <option value="4" ${c.credits === 4 ? 'selected' : ''}>4 Cr</option>
         </select>
-        <select onchange="window.updateGpaCourse(${i}, 'grade', this.value)" class="text-xs px-2 py-1.5 rounded-lg border border-slate-200 bg-white text-slate-900 outline-none">
+        <select onchange="window.updateGpaCourse(${i}, 'grade', this.value)" class="text-xs px-2 py-1.5 rounded-lg border border-white/10 bg-slate-950 text-white outline-none">
           ${data.gradingScale.filter(g => g.points !== null).map(g => `
             <option value="${g.grade}" ${c.grade === g.grade ? 'selected' : ''}>${g.grade} (${g.points.toFixed(1)})</option>
           `).join("")}
         </select>
-        <button onclick="window.removeGpaCourse(${i})" class="p-1.5 text-slate-400 hover:text-red-600 rounded-lg hover:bg-red-50 transition-colors">
+        <button onclick="window.removeGpaCourse(${i})" class="p-1.5 text-slate-400 hover:text-red-400 rounded-lg hover:bg-white/10 transition-colors">
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
         </button>
       </div>
@@ -767,10 +762,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const gpa = totalCredits > 0 ? (totalPoints / totalCredits).toFixed(2) : "0.00";
     gpaResultDisplay.innerHTML = `
-      <div class="text-center p-3.5 bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 rounded-xl shadow-xs text-white">
-        <span class="text-[10px] text-slate-300 uppercase font-black tracking-widest block">Estimated SGPA</span>
+      <div class="text-center p-3.5 bg-gradient-to-br from-[#111827] to-[#0A0E17] border border-white/10 rounded-xl shadow-md text-white">
+        <span class="text-[10px] text-slate-400 uppercase font-black tracking-widest block">Estimated SGPA</span>
         <span class="text-3xl font-black text-amber-400 mt-0.5 block tracking-tight">${gpa} <span class="text-xs text-slate-400 font-medium">/ 4.00</span></span>
-        <div class="flex justify-center gap-5 mt-2 text-[11px] text-slate-300">
+        <div class="flex justify-center gap-5 mt-2 text-[11px] text-slate-400">
           <span>Total Credits: <strong class="text-white">${totalCredits}</strong></span>
           <span>Quality Points: <strong class="text-white">${totalPoints.toFixed(1)}</strong></span>
         </div>
@@ -779,7 +774,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // -------------------------------------------------------------
-  // ACADEMIC CALENDAR RENDERER
+  // ACADEMIC CALENDAR RENDERER (Black & Crimson Red)
   // -------------------------------------------------------------
   const calendarContainer = document.getElementById("calendar-events-list");
   const semFilterSelect = document.getElementById("sem-filter");
@@ -790,18 +785,18 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!sem) return;
 
     calendarContainer.innerHTML = `
-      <h3 class="text-[11px] font-black text-[#8C1D24] uppercase tracking-widest mb-2 px-1">${sem.name}</h3>
+      <h3 class="text-[11px] font-black text-red-400 uppercase tracking-widest mb-2 px-1">${sem.name}</h3>
       <div class="space-y-2">
         ${sem.events.map(ev => {
-          let badgeColor = "bg-blue-50 text-blue-800 border border-blue-200";
-          if (ev.type === "exam") badgeColor = "bg-amber-50 text-amber-800 border border-amber-200";
-          if (ev.type === "holiday") badgeColor = "bg-emerald-50 text-emerald-800 border border-emerald-200";
+          let badgeColor = "bg-blue-950/80 text-blue-300 border border-blue-500/40";
+          if (ev.type === "exam") badgeColor = "bg-amber-950/80 text-amber-300 border border-amber-500/40";
+          if (ev.type === "holiday") badgeColor = "bg-emerald-950/80 text-emerald-300 border border-emerald-500/40";
 
           return `
-            <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-200 shadow-xs flex items-start justify-between gap-2.5">
+            <div class="p-2.5 bg-white/5 rounded-xl border border-white/10 shadow-xs flex items-start justify-between gap-2.5">
               <div>
-                <h4 class="font-bold text-xs text-slate-900">${ev.title}</h4>
-                <p class="text-[10px] text-slate-500 mt-0.5">${ev.date}</p>
+                <h4 class="font-bold text-xs text-white">${ev.title}</h4>
+                <p class="text-[10px] text-slate-400 mt-0.5">${ev.date}</p>
               </div>
               <span class="text-[9px] font-bold px-2 py-0.5 rounded-full ${badgeColor} shrink-0 uppercase tracking-wider">${ev.type}</span>
             </div>
