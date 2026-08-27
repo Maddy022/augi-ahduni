@@ -49,63 +49,63 @@
 
     <!-- Desktop Navigation Bar -->
     <nav class="hidden md:flex items-center gap-1 bg-[#0F172A] p-1 rounded-2xl border border-white/10 shadow-md">
-      <button data-tab="chat" class="nav-btn px-3.5 py-1 text-xs font-bold active-tab text-red-500 rounded-xl flex items-center gap-1.5 transition-all">
+      <button data-tab="chat" class="nav-btn px-3.5 py-1.5 text-xs font-bold active-tab text-red-500 rounded-xl flex items-center gap-1.5 transition-all">
         💬 Assistant
       </button>
-      <button data-tab="map" class="nav-btn px-3.5 py-1 text-xs font-medium rounded-xl text-slate-400 hover:text-white flex items-center gap-1.5 transition-all">
+      <button data-tab="map" class="nav-btn px-3.5 py-1.5 text-xs font-medium rounded-xl text-slate-400 hover:text-white flex items-center gap-1.5 transition-all">
         🗺️ Campus Map
       </button>
-      <button data-tab="directory" class="nav-btn px-3.5 py-1 text-xs font-medium rounded-xl text-slate-400 hover:text-white flex items-center gap-1.5 transition-all">
+      <button data-tab="directory" class="nav-btn px-3.5 py-1.5 text-xs font-medium rounded-xl text-slate-400 hover:text-white flex items-center gap-1.5 transition-all">
         👥 Directory
       </button>
-      <button data-tab="tools" class="nav-btn px-3.5 py-1 text-xs font-medium rounded-xl text-slate-400 hover:text-white flex items-center gap-1.5 transition-all">
+      <button data-tab="tools" class="nav-btn px-3.5 py-1.5 text-xs font-medium rounded-xl text-slate-400 hover:text-white flex items-center gap-1.5 transition-all">
         ⚡ Student Tools
       </button>
     </nav>
 
     <!-- Header Actions -->
     <div class="flex items-center gap-2">
-      <button class="open-sos-btn px-2.5 py-1 bg-[#8C1D24] hover:bg-[#BA1C26] text-white font-bold text-xs rounded-xl flex items-center gap-1 shadow-md shadow-red-950/60 border border-red-500/30 transition-all active:scale-95">
+      <button class="open-sos-btn px-3 py-1.5 bg-[#8C1D24] hover:bg-[#BA1C26] text-white font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-md shadow-red-950/60 border border-red-500/30 transition-all active:scale-95">
         <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
         <span>SOS</span>
       </button>
     </div>
   </header>
 
-  <!-- MAIN APP VIEWPORT (Full Screen, Robust Flex Across All Tabs) -->
-  <main class="flex-1 overflow-hidden relative max-w-6xl w-full mx-auto p-2 sm:p-3 flex flex-col">
+  <!-- MAIN APP CONTAINER (Only 1 Active Tab Visible at a time) -->
+  <main class="flex-1 overflow-hidden relative max-w-6xl w-full mx-auto p-2 sm:p-4 flex flex-col">
 
     <!-- 1. CHAT TAB -->
-    <section id="tab-chat" class="tab-content active h-full flex flex-col overflow-hidden">
+    <section id="tab-chat" class="tab-content active space-y-3">
       <!-- Chat Messages Container -->
-      <div id="chat-messages" class="flex-1 overflow-y-auto pane-scroll pr-1 sm:pr-2 space-y-2.5 mb-2"></div>
+      <div id="chat-messages" class="flex-1 overflow-y-auto pane-scroll pr-1 sm:pr-2 space-y-3 mb-1"></div>
 
       <!-- Chat Input Box -->
-      <div class="shrink-0 rounded-2xl p-2 flex items-center gap-2 border border-white/10 bg-[#0F172A] shadow-xl">
+      <div class="shrink-0 rounded-2xl p-2.5 flex items-center gap-2 border border-white/10 bg-[#0F172A] shadow-xl">
         <button id="voice-btn" class="p-2 text-slate-400 hover:text-red-400 rounded-xl hover:bg-white/5 transition-all shrink-0" title="Voice Input">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
         </button>
 
         <input id="chat-input" type="text" placeholder="Ask AUGI about attendance, cafeterias, buildings, advisors..." class="flex-1 text-xs sm:text-sm bg-transparent border-none outline-none text-white placeholder-slate-500">
 
-        <button id="send-btn" class="p-2 bg-gradient-to-r from-[#8C1D24] to-[#BA1C26] hover:from-[#BA1C26] hover:to-[#E11D48] text-white rounded-xl shadow-md transition-all active:scale-95 shrink-0 border border-red-500/30" title="Send Message">
+        <button id="send-btn" class="p-2.5 bg-gradient-to-r from-[#8C1D24] to-[#BA1C26] hover:from-[#BA1C26] hover:to-[#E11D48] text-white rounded-xl shadow-md transition-all active:scale-95 shrink-0 border border-red-500/30 font-bold" title="Send Message">
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
         </button>
       </div>
     </section>
 
     <!-- 2. CAMPUS MAP TAB -->
-    <section id="tab-map" class="tab-content h-full flex flex-col overflow-hidden space-y-2">
+    <section id="tab-map" class="tab-content space-y-3">
       <!-- Search Bar -->
       <div class="shrink-0 relative w-full">
-        <svg class="w-3.5 h-3.5 absolute left-3 top-2.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-        <input id="map-search" type="text" placeholder="Search buildings, CDC, Library, Gates, Food Court..." class="w-full pl-9 pr-3 py-1.5 text-xs bg-[#0F172A] border border-white/10 rounded-xl outline-none text-white placeholder-slate-500 focus:border-red-500 transition-all shadow-xs">
+        <svg class="w-4 h-4 absolute left-3.5 top-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        <input id="map-search" type="text" placeholder="Search buildings, CDC, Library, Gates, Food Court..." class="w-full pl-10 pr-4 py-2 text-xs sm:text-sm bg-[#0F172A] border border-white/10 rounded-xl outline-none text-white placeholder-slate-500 focus:border-red-500 transition-all shadow-xs">
       </div>
 
-      <!-- Map & Details Grid (Scrollable pane for full responsiveness) -->
-      <div class="flex-1 overflow-y-auto pane-scroll grid grid-cols-1 md:grid-cols-12 gap-2.5 items-start pr-1 pb-4">
-        <!-- SVG Map Container -->
-        <div class="md:col-span-7 bg-[#080C14] rounded-2xl overflow-hidden border border-white/10 shadow-lg p-1 aspect-[16/11]">
+      <!-- Map & Details Grid -->
+      <div class="flex-1 overflow-y-auto pane-scroll grid grid-cols-1 lg:grid-cols-12 gap-3.5 items-start pr-1 pb-4">
+        <!-- SVG Map Container (7 cols on desktop) -->
+        <div class="lg:col-span-7 bg-[#080C14] rounded-2xl overflow-hidden border border-white/10 shadow-lg p-1.5 aspect-[16/11]">
           <svg id="campus-map-svg" viewBox="0 0 1200 800" class="w-full h-full">
             <defs>
               <pattern id="campus-grid-dark" width="50" height="50" patternUnits="userSpaceOnUse">
@@ -289,22 +289,22 @@
           </svg>
         </div>
 
-        <!-- Details Card -->
-        <div id="building-details" class="md:col-span-5">
+        <!-- Details Card (5 cols on desktop) -->
+        <div id="building-details" class="lg:col-span-5">
           <!-- Rendered by selectBuilding -->
         </div>
       </div>
     </section>
 
     <!-- 3. DIRECTORY TAB -->
-    <section id="tab-directory" class="tab-content h-full flex flex-col overflow-hidden space-y-2">
+    <section id="tab-directory" class="tab-content space-y-3">
       <!-- Search & Filters at Top -->
-      <div class="shrink-0 flex flex-col sm:flex-row gap-2">
+      <div class="shrink-0 flex flex-col sm:flex-row gap-2.5">
         <div class="relative flex-1">
-          <svg class="w-3.5 h-3.5 absolute left-3 top-2.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-          <input id="directory-search" type="text" placeholder="Search major (e.g. CSE, Finance, Economics, Physics)..." class="w-full pl-9 pr-3 py-1.5 text-xs bg-[#0F172A] border border-white/10 rounded-xl outline-none text-white placeholder-slate-500 focus:border-red-500 transition-all shadow-xs">
+          <svg class="w-4 h-4 absolute left-3.5 top-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          <input id="directory-search" type="text" placeholder="Search major (e.g. CSE, Finance, Economics, Physics)..." class="w-full pl-10 pr-4 py-2 text-xs sm:text-sm bg-[#0F172A] border border-white/10 rounded-xl outline-none text-white placeholder-slate-500 focus:border-red-500 transition-all shadow-xs">
         </div>
-        <select id="school-filter" class="text-xs px-3 py-1.5 bg-[#0F172A] border border-white/10 rounded-xl outline-none text-white shadow-xs">
+        <select id="school-filter" class="text-xs sm:text-sm px-3 py-2 bg-[#0F172A] border border-white/10 rounded-xl outline-none text-white shadow-xs">
           <option value="all">All Schools & Centres</option>
           <option value="Engineering">School of Engineering (SEAS)</option>
           <option value="Arts and Sciences">School of Arts & Sciences (SAS)</option>
@@ -313,26 +313,26 @@
       </div>
 
       <!-- Directory List Pane -->
-      <div id="directory-list" class="flex-1 overflow-y-auto pane-scroll space-y-2.5 pr-1 pb-4"></div>
+      <div id="directory-list" class="flex-1 overflow-y-auto pane-scroll space-y-3 pr-1 pb-4"></div>
     </section>
 
     <!-- 4. STUDENT TOOLS TAB -->
-    <section id="tab-tools" class="tab-content h-full flex flex-col overflow-y-auto pane-scroll space-y-3 pr-1 pb-6">
+    <section id="tab-tools" class="tab-content overflow-y-auto pane-scroll space-y-4 pr-1 pb-6">
       
       <!-- ATTENDANCE CALCULATOR -->
-      <div class="p-4 rounded-2xl border border-white/10 bg-[#0F172A] shadow-xl">
-        <div class="flex items-center gap-2.5 mb-3">
-          <span class="p-2 bg-red-950 text-red-300 border border-red-500/40 rounded-xl text-xs font-bold">📉</span>
+      <div class="p-4 sm:p-5 rounded-2xl border border-white/10 bg-[#0F172A] shadow-xl">
+        <div class="flex items-center gap-2.5 mb-3.5">
+          <span class="p-2.5 bg-red-950 text-red-300 border border-red-500/40 rounded-xl text-xs font-bold">📉</span>
           <div>
-            <h3 class="font-bold text-xs sm:text-sm text-white">Attendance & Grade Drop Simulator</h3>
+            <h3 class="font-bold text-sm sm:text-base text-white">Attendance & Grade Drop Simulator</h3>
             <p class="text-[11px] text-slate-400">Calculate exact safe absences before a 1-grade drop or NP grade</p>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-3">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-3.5">
           <div>
             <label class="text-[10px] font-bold text-slate-400 block mb-1 uppercase tracking-wider">Course Credits</label>
-            <select id="att-credits" class="w-full text-xs p-2 bg-[#080C14] border border-white/10 rounded-lg text-white outline-none focus:border-red-500">
+            <select id="att-credits" class="w-full text-xs sm:text-sm p-2.5 bg-[#080C14] border border-white/10 rounded-lg text-white outline-none focus:border-red-500">
               <option value="4">4.0 Credits (45 Sessions)</option>
               <option value="3" selected>3.0 Credits (30 Sessions)</option>
               <option value="2">2.0 Credits (20 Sessions)</option>
@@ -342,11 +342,11 @@
           </div>
           <div>
             <label class="text-[10px] font-bold text-slate-400 block mb-1 uppercase tracking-wider">Total Sessions</label>
-            <input id="att-total" type="number" value="30" class="w-full text-xs p-2 bg-[#080C14] border border-white/10 rounded-lg text-white outline-none focus:border-red-500">
+            <input id="att-total" type="number" value="30" class="w-full text-xs sm:text-sm p-2.5 bg-[#080C14] border border-white/10 rounded-lg text-white outline-none focus:border-red-500">
           </div>
           <div>
             <label class="text-[10px] font-bold text-slate-400 block mb-1 uppercase tracking-wider">Classes Missed</label>
-            <input id="att-missed" type="number" value="4" min="0" class="w-full text-xs p-2 bg-[#080C14] border border-white/10 rounded-lg text-white outline-none focus:border-red-500">
+            <input id="att-missed" type="number" value="4" min="0" class="w-full text-xs sm:text-sm p-2.5 bg-[#080C14] border border-white/10 rounded-lg text-white outline-none focus:border-red-500">
           </div>
         </div>
 
@@ -354,35 +354,35 @@
       </div>
 
       <!-- GPA ESTIMATOR -->
-      <div class="p-4 rounded-2xl border border-white/10 bg-[#0F172A] shadow-xl">
-        <div class="flex items-center justify-between mb-3">
+      <div class="p-4 sm:p-5 rounded-2xl border border-white/10 bg-[#0F172A] shadow-xl">
+        <div class="flex items-center justify-between mb-3.5">
           <div class="flex items-center gap-2.5">
-            <span class="p-2 bg-amber-950 text-amber-300 border border-amber-500/40 rounded-xl text-xs font-bold">🎓</span>
+            <span class="p-2.5 bg-amber-950 text-amber-300 border border-amber-500/40 rounded-xl text-xs font-bold">🎓</span>
             <div>
-              <h3 class="font-bold text-xs sm:text-sm text-white">AU GPA / SGPA Calculator (4.00 Scale)</h3>
+              <h3 class="font-bold text-sm sm:text-base text-white">AU GPA / SGPA Calculator (4.00 Scale)</h3>
               <p class="text-[11px] text-slate-400">Estimate semester performance on AU grade points</p>
             </div>
           </div>
-          <button id="add-course-btn" class="px-2.5 py-1 bg-white/10 hover:bg-white/20 text-xs font-bold rounded-lg text-white transition-all active:scale-95 border border-white/10">
+          <button id="add-course-btn" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-xs font-bold rounded-lg text-white transition-all active:scale-95 border border-white/10">
             + Add Course
           </button>
         </div>
 
-        <div id="gpa-course-list" class="space-y-2 mb-3"></div>
+        <div id="gpa-course-list" class="space-y-2 mb-3.5"></div>
         <div id="gpa-result"></div>
       </div>
 
       <!-- ACADEMIC CALENDAR -->
-      <div class="p-4 rounded-2xl border border-white/10 bg-[#0F172A] shadow-xl">
-        <div class="flex items-center justify-between mb-3">
+      <div class="p-4 sm:p-5 rounded-2xl border border-white/10 bg-[#0F172A] shadow-xl">
+        <div class="flex items-center justify-between mb-3.5">
           <div class="flex items-center gap-2.5">
-            <span class="p-2 bg-red-950 text-red-300 border border-red-500/40 rounded-xl text-xs font-bold">📅</span>
+            <span class="p-2.5 bg-red-950 text-red-300 border border-red-500/40 rounded-xl text-xs font-bold">📅</span>
             <div>
-              <h3 class="font-bold text-xs sm:text-sm text-white">Academic Calendar (2026–2027)</h3>
+              <h3 class="font-bold text-sm sm:text-base text-white">Academic Calendar (2026–2027)</h3>
               <p class="text-[11px] text-slate-400">Official semester milestones, exams & breaks</p>
             </div>
           </div>
-          <select id="sem-filter" class="text-xs px-2.5 py-1 bg-[#080C14] border border-white/10 rounded-lg text-white outline-none">
+          <select id="sem-filter" class="text-xs sm:text-sm px-3 py-1.5 bg-[#080C14] border border-white/10 rounded-lg text-white outline-none">
             <option value="monsoon2026">Monsoon 2026</option>
             <option value="winter2027">Winter 2027</option>
             <option value="summer2027">Summer 2027</option>
