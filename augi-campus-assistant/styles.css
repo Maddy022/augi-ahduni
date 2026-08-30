@@ -1,11 +1,22 @@
-/* AUGI - Ahmedabad University Black & Crimson Red Stylesheet */
+/* AUGI - Ahmedabad University Stitch Design System Stylesheet */
+
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 
 :root {
-  --au-crimson: #8C1D24;
-  --au-crimson-dark: #5B0E13;
-  --au-crimson-light: #BA1C26;
-  --au-crimson-glow: rgba(186, 28, 38, 0.4);
-  --au-gold: #D97706;
+  --primary: #ffb4ab;
+  --primary-container: #d71920;
+  --on-primary-container: #ffece9;
+  --surface-dim: #121315;
+  --surface-container: #1f2022;
+  --surface-container-high: #292a2c;
+  --surface-container-highest: #343537;
+  --on-surface: #e3e2e5;
+  --on-surface-variant: #e6bdb8;
+  --sos-red: #FF4D4D;
+  --warning-amber: #F1C40F;
+  --success-green: #2ECC71;
+  --surface-glass: rgba(255, 255, 255, 0.04);
 }
 
 * {
@@ -19,13 +30,51 @@ html, body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #05070B !important;
-  color: #FFFFFF !important;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #121315 !important;
+  color: #e3e2e5 !important;
+  font-family: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-tap-highlight-color: transparent;
 }
 
-/* STRICT TAB VISIBILITY (Ensures ONLY the active tab is shown) */
+/* Material Symbols */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+.material-symbols-outlined.filled {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Pulse Animation for SOS */
+@keyframes pulse-sos {
+  0% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(255, 77, 77, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); }
+}
+.animate-pulse-sos {
+  animation: pulse-sos 2s infinite;
+}
+
+/* Glassmorphism utilities */
+.glass-panel {
+  background: rgba(26, 29, 35, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.input-dark {
+  background-color: #2D323B;
+  border: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s;
+  color: #FFFFFF;
+}
+.input-dark:focus {
+  outline: none;
+  border-bottom-color: #d71920;
+}
+
+/* Strict Tab Visibility (Only active tab is displayed) */
 .tab-content {
   display: none !important;
 }
@@ -37,62 +86,46 @@ html, body {
   flex: 1 1 0% !important;
 }
 
-/* Header & Nav */
-.glass-header {
-  background: #080C14 !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-}
-
-.glass-nav {
-  background: #080C14 !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-}
-
-.glass-card {
-  background: #0F172A !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-}
-
 /* Chat Bubbles */
 .chat-bubble-user {
-  background: linear-gradient(135deg, #8C1D24 0%, #BA1C26 100%) !important;
+  background: linear-gradient(135deg, #d71920 0%, #BA1C26 100%) !important;
   color: #FFFFFF !important;
   border-radius: 16px 16px 4px 16px;
-  box-shadow: 0 4px 14px rgba(186, 28, 38, 0.35);
+  box-shadow: 0 4px 14px rgba(215, 25, 32, 0.35);
 }
 
 .chat-bubble-augi {
-  background: #0F172A !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  color: #F8FAFC !important;
+  background: rgba(26, 29, 35, 0.9) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #e3e2e5 !important;
   border-radius: 16px 16px 16px 4px;
 }
 
 .chip-btn {
-  background: rgba(255, 255, 255, 0.05) !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  color: #E2E8F0 !important;
+  background: #292a2c !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #e3e2e5 !important;
   transition: all 0.15s ease;
 }
 .chip-btn:hover {
-  background: rgba(140, 29, 36, 0.3) !important;
-  border-color: #BA1C26 !important;
-  color: #FFFFFF !important;
+  background: #38393b !important;
+  border-color: #d71920 !important;
+  color: #ffb4ab !important;
 }
 
-/* Map Styling */
+/* Map Interactions */
 .map-building {
   cursor: pointer;
   transition: transform 0.15s ease, filter 0.15s ease;
   transform-origin: center;
 }
 .map-building:hover {
-  filter: drop-shadow(0 4px 14px rgba(186, 28, 38, 0.5));
+  filter: drop-shadow(0 4px 14px rgba(215, 25, 32, 0.6));
 }
 .map-building.selected rect.bldg-card {
-  stroke: #F59E0B !important;
-  stroke-width: 4 !important;
+  stroke: #d71920 !important;
+  stroke-width: 3.5 !important;
+  filter: drop-shadow(0 4px 14px rgba(215, 25, 32, 0.4));
 }
 
 .gate-marker {
@@ -115,11 +148,12 @@ html, body {
   border-radius: 9999px;
 }
 .pane-scroll::-webkit-scrollbar-thumb:hover {
-  background: #BA1C26;
+  background: #d71920;
 }
 
+/* Nav button active states */
 .nav-btn.active-tab {
-  color: #EF4444 !important;
-  background: rgba(186, 28, 38, 0.15) !important;
+  color: #ffb4ab !important;
+  border-bottom: 2px solid #d71920 !important;
   font-weight: 700;
 }

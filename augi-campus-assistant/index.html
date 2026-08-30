@@ -1,111 +1,175 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-[#05070B]">
+<html class="dark h-full" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>AUGI - Ahmedabad University AI Campus Assistant</title>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+  <title>AUGI - Ahmedabad University Campus Assistant</title>
+  
   <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+  <!-- Stitch Theme Config -->
+  <script id="tailwind-config">
     tailwind.config = {
+      darkMode: "class",
       theme: {
         extend: {
           colors: {
-            au: {
-              crimson: '#8C1D24',
-              crimsonDark: '#5B0E13',
-              crimsonLight: '#BA1C26',
-              bgBlack: '#05070B',
-              bgPanel: '#080C14',
-              bgCard: '#0F172A',
-            }
+            "surface-dim": "#121315",
+            "on-tertiary-container": "#ecf0fc",
+            "outline-variant": "#5d3f3c",
+            "on-secondary-fixed": "#191c22",
+            "tertiary-container": "#686d77",
+            "primary-fixed-dim": "#ffb4ab",
+            "error": "#ffb4ab",
+            "on-tertiary-fixed": "#171c24",
+            "surface-container-lowest": "#0d0e10",
+            "tertiary-fixed": "#dee2ee",
+            "surface-glass": "rgba(255, 255, 255, 0.04)",
+            "inverse-surface": "#e3e2e5",
+            "on-secondary": "#2d3037",
+            "surface-bright": "#38393b",
+            "surface-variant": "#343537",
+            "on-error-container": "#ffdad6",
+            "surface-tint": "#ffb4ab",
+            "on-primary-fixed": "#410002",
+            "surface-container": "#1f2022",
+            "on-primary": "#690006",
+            "on-primary-fixed-variant": "#93000d",
+            "on-surface-variant": "#e6bdb8",
+            "on-error": "#690005",
+            "on-tertiary-fixed-variant": "#424750",
+            "success-green": "#2ECC71",
+            "secondary": "#c4c6ce",
+            "secondary-container": "#464950",
+            "on-tertiary": "#2c313a",
+            "sos-red": "#FF4D4D",
+            "tertiary": "#c2c6d2",
+            "background": "#121315",
+            "error-container": "#93000a",
+            "primary-fixed": "#ffdad6",
+            "on-primary-container": "#ffece9",
+            "on-surface": "#e3e2e5",
+            "secondary-fixed-dim": "#c4c6ce",
+            "surface": "#121315",
+            "inverse-primary": "#c00014",
+            "surface-container-low": "#1b1c1e",
+            "on-background": "#e3e2e5",
+            "inverse-on-surface": "#303033",
+            "warning-amber": "#F1C40F",
+            "on-secondary-fixed-variant": "#44474d",
+            "secondary-fixed": "#e1e2ea",
+            "surface-container-high": "#292a2c",
+            "on-secondary-container": "#b6b8c0",
+            "tertiary-fixed-dim": "#c2c6d2",
+            "outline": "#ad8884",
+            "surface-container-highest": "#343537",
+            "primary": "#ffb4ab",
+            "primary-container": "#d71920"
+          },
+          fontFamily: {
+            "display-lg": ["Hanken Grotesk"],
+            "title-md": ["Hanken Grotesk"],
+            "headline-lg": ["Hanken Grotesk"],
+            "body-sm": ["Hanken Grotesk"],
+            "body-lg": ["Hanken Grotesk"],
+            "label-mono": ["JetBrains Mono"]
           }
         }
       }
     }
   </script>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css"/>
 </head>
-<body class="h-full w-full overflow-hidden bg-[#05070B] text-white flex flex-col antialiased select-none">
+<body class="bg-surface-dim text-on-surface font-body-lg antialiased h-full w-full overflow-hidden flex flex-col select-none">
 
-  <!-- TOP HEADER (Pure Black & Crimson Red) -->
-  <header class="shrink-0 z-40 bg-[#080C14] px-4 py-2.5 flex items-center justify-between border-b border-white/10 shadow-lg">
+  <!-- TOP APP BAR (Desktop & Mobile Unified Stitch Header) -->
+  <header class="shrink-0 z-50 backdrop-blur-xl bg-surface-container/95 border-b border-white/10 shadow-md h-16 md:h-20 px-4 md:px-8 flex justify-between items-center">
     <!-- Brand Info -->
-    <div class="flex items-center gap-2.5">
-      <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-[#8C1D24] to-[#BA1C26] text-white flex items-center justify-center font-black text-xs shadow-md shadow-red-950/60 border border-red-500/30">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 md:w-10 md:h-10 bg-primary-container rounded-full flex items-center justify-center text-on-primary-container font-title-md font-bold shadow-md shadow-red-950/60 border border-red-400/30 shrink-0">
         AU
       </div>
       <div>
-        <div class="flex items-center gap-1.5">
-          <h1 class="font-black text-sm tracking-tight text-white flex items-center gap-1">
-            AUGI
-            <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
-          </h1>
-          <span class="text-[9px] font-bold px-1.5 py-0.2 bg-red-950 text-red-300 border border-red-500/40 rounded-full">2026-27</span>
+        <div class="flex items-center gap-2">
+          <h1 class="font-display-lg text-lg md:text-2xl font-extrabold text-primary tracking-tighter">AUGI</h1>
+          <span class="text-[10px] md:text-xs bg-primary-container/30 text-primary px-2 py-0.5 rounded-full font-label-mono border border-primary/20">2026-27</span>
         </div>
-        <p class="text-[10px] text-slate-400 -mt-0.5 font-medium">Ahmedabad University Guide</p>
+        <p class="text-[11px] text-on-surface-variant hidden sm:block -mt-0.5">Ahmedabad University Guide</p>
       </div>
     </div>
 
-    <!-- Desktop Navigation Bar -->
-    <nav class="hidden md:flex items-center gap-1 bg-[#0F172A] p-1 rounded-2xl border border-white/10 shadow-md">
-      <button data-tab="chat" class="nav-btn px-3.5 py-1.5 text-xs font-bold active-tab text-red-500 rounded-xl flex items-center gap-1.5 transition-all">
-        💬 Assistant
+    <!-- Desktop Navigation Tabs -->
+    <nav class="hidden md:flex items-center gap-6">
+      <button data-tab="chat" class="nav-btn active-tab text-primary font-bold pb-1 flex items-center gap-2 transition-all">
+        <span class="material-symbols-outlined filled text-xl">chat_bubble</span>
+        <span>Assistant</span>
       </button>
-      <button data-tab="map" class="nav-btn px-3.5 py-1.5 text-xs font-medium rounded-xl text-slate-400 hover:text-white flex items-center gap-1.5 transition-all">
-        🗺️ Campus Map
+      <button data-tab="map" class="nav-btn text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2 pb-1">
+        <span class="material-symbols-outlined text-xl">explore</span>
+        <span>Campus Map</span>
       </button>
-      <button data-tab="directory" class="nav-btn px-3.5 py-1.5 text-xs font-medium rounded-xl text-slate-400 hover:text-white flex items-center gap-1.5 transition-all">
-        👥 Directory
+      <button data-tab="directory" class="nav-btn text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2 pb-1">
+        <span class="material-symbols-outlined text-xl">group</span>
+        <span>Directory</span>
       </button>
-      <button data-tab="tools" class="nav-btn px-3.5 py-1.5 text-xs font-medium rounded-xl text-slate-400 hover:text-white flex items-center gap-1.5 transition-all">
-        ⚡ Student Tools
+      <button data-tab="tools" class="nav-btn text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2 pb-1">
+        <span class="material-symbols-outlined text-xl">handyman</span>
+        <span>Student Tools</span>
       </button>
     </nav>
 
     <!-- Header Actions -->
-    <div class="flex items-center gap-2">
-      <button class="open-sos-btn px-3 py-1.5 bg-[#8C1D24] hover:bg-[#BA1C26] text-white font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-md shadow-red-950/60 border border-red-500/30 transition-all active:scale-95">
-        <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+    <div class="flex items-center gap-3">
+      <button class="open-sos-btn bg-primary-container text-on-primary-container px-4 md:px-6 py-1.5 md:py-2 rounded-full font-title-md font-bold text-xs md:text-sm flex items-center gap-2 hover:brightness-110 active:scale-95 transition-all animate-pulse-sos shadow-lg shadow-red-900/50">
+        <span class="material-symbols-outlined filled text-sm md:text-base">emergency</span>
         <span>SOS</span>
       </button>
     </div>
   </header>
 
-  <!-- MAIN APP CONTAINER (Only 1 Active Tab Visible at a time) -->
-  <main class="flex-1 overflow-hidden relative max-w-6xl w-full mx-auto p-2 sm:p-4 flex flex-col">
+  <!-- MAIN VIEWPORT CONTAINER (Isolated Full-Screen Tabs) -->
+  <main class="flex-1 overflow-hidden relative max-w-7xl w-full mx-auto p-3 md:p-6 flex flex-col">
 
-    <!-- 1. CHAT TAB -->
+    <!-- 1. ASSISTANT CHAT TAB -->
     <section id="tab-chat" class="tab-content active space-y-3">
       <!-- Chat Messages Container -->
-      <div id="chat-messages" class="flex-1 overflow-y-auto pane-scroll pr-1 sm:pr-2 space-y-3 mb-1"></div>
+      <div id="chat-messages" class="flex-1 overflow-y-auto pane-scroll pr-1 md:pr-2 space-y-3 mb-1">
+        <!-- Rendered via app.js -->
+      </div>
 
       <!-- Chat Input Box -->
-      <div class="shrink-0 rounded-2xl p-2.5 flex items-center gap-2 border border-white/10 bg-[#0F172A] shadow-xl">
-        <button id="voice-btn" class="p-2 text-slate-400 hover:text-red-400 rounded-xl hover:bg-white/5 transition-all shrink-0" title="Voice Input">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+      <div class="shrink-0 glass-panel rounded-2xl p-2.5 flex items-center gap-2.5 shadow-xl">
+        <button id="voice-btn" class="p-2 text-on-surface-variant hover:text-primary rounded-xl hover:bg-white/5 transition-all shrink-0" title="Voice Input">
+          <span class="material-symbols-outlined">mic</span>
         </button>
 
-        <input id="chat-input" type="text" placeholder="Ask AUGI about attendance, cafeterias, buildings, advisors..." class="flex-1 text-xs sm:text-sm bg-transparent border-none outline-none text-white placeholder-slate-500">
+        <input id="chat-input" type="text" placeholder="Ask AUGI about attendance, cafeterias, buildings, advisors..." class="bg-transparent border-none focus:outline-none flex-1 text-xs md:text-sm text-on-surface placeholder:text-on-surface-variant">
 
-        <button id="send-btn" class="p-2.5 bg-gradient-to-r from-[#8C1D24] to-[#BA1C26] hover:from-[#BA1C26] hover:to-[#E11D48] text-white rounded-xl shadow-md transition-all active:scale-95 shrink-0 border border-red-500/30 font-bold" title="Send Message">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        <button id="send-btn" class="w-10 h-10 bg-primary-container rounded-full flex items-center justify-center text-on-primary-container hover:brightness-110 active:scale-95 transition-all shrink-0 shadow-md" title="Send Message">
+          <span class="material-symbols-outlined">arrow_forward</span>
         </button>
       </div>
     </section>
 
-    <!-- 2. CAMPUS MAP TAB -->
+    <!-- 2. CAMPUS MAP TAB (Stitch Redesign Vector + Dark Blueprint) -->
     <section id="tab-map" class="tab-content space-y-3">
       <!-- Search Bar -->
       <div class="shrink-0 relative w-full">
-        <svg class="w-4 h-4 absolute left-3.5 top-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-        <input id="map-search" type="text" placeholder="Search buildings, CDC, Library, Gates, Food Court..." class="w-full pl-10 pr-4 py-2 text-xs sm:text-sm bg-[#0F172A] border border-white/10 rounded-xl outline-none text-white placeholder-slate-500 focus:border-red-500 transition-all shadow-xs">
+        <span class="material-symbols-outlined absolute left-3.5 top-2.5 text-on-surface-variant text-lg">search</span>
+        <input id="map-search" type="text" placeholder="Search buildings, CDC, Library, Gates, Food Court..." class="w-full pl-11 pr-4 py-2 text-xs md:text-sm bg-surface-container-high border border-white/10 rounded-xl outline-none text-white placeholder-on-surface-variant focus:border-primary transition-all shadow-xs">
       </div>
 
       <!-- Map & Details Grid -->
       <div class="flex-1 overflow-y-auto pane-scroll grid grid-cols-1 lg:grid-cols-12 gap-3.5 items-start pr-1 pb-4">
-        <!-- SVG Map Container (7 cols on desktop) -->
-        <div class="lg:col-span-7 bg-[#080C14] rounded-2xl overflow-hidden border border-white/10 shadow-lg p-1.5 aspect-[16/11]">
+        <!-- SVG Map Container -->
+        <div class="lg:col-span-7 bg-[#080C14] rounded-2xl overflow-hidden border border-white/10 shadow-lg p-2 aspect-[16/11]">
           <svg id="campus-map-svg" viewBox="0 0 1200 800" class="w-full h-full">
             <defs>
               <pattern id="campus-grid-dark" width="50" height="50" patternUnits="userSpaceOnUse">
@@ -113,21 +177,21 @@
               </pattern>
             </defs>
 
-            <rect width="1200" height="800" fill="#070A12"/>
+            <rect width="1200" height="800" fill="#0D0E10"/>
             <rect width="1200" height="800" fill="url(#campus-grid-dark)"/>
 
             <!-- Zones -->
-            <rect x="360" y="30" width="500" height="160" rx="20" fill="#0F172A" fill-opacity="0.7" stroke="#334155" stroke-width="1.5" stroke-dasharray="6 6"/>
-            <text x="380" y="60" fill="#64748B" font-size="14" font-weight="900" letter-spacing="1.5">NORTH CAMPUS</text>
+            <rect x="360" y="30" width="500" height="160" rx="20" fill="#1F2022" fill-opacity="0.8" stroke="#343537" stroke-width="1.5" stroke-dasharray="6 6"/>
+            <text x="380" y="60" fill="#94A3B8" font-size="14" font-weight="900" letter-spacing="1.5">NORTH CAMPUS</text>
 
-            <rect x="340" y="240" width="530" height="520" rx="24" fill="#0F172A" fill-opacity="0.7" stroke="#334155" stroke-width="1.5" stroke-dasharray="6 6"/>
-            <text x="365" y="270" fill="#64748B" font-size="14" font-weight="900" letter-spacing="1.5">CENTRAL CAMPUS</text>
+            <rect x="340" y="240" width="530" height="520" rx="24" fill="#1F2022" fill-opacity="0.8" stroke="#343537" stroke-width="1.5" stroke-dasharray="6 6"/>
+            <text x="365" y="270" fill="#94A3B8" font-size="14" font-weight="900" letter-spacing="1.5">CENTRAL CAMPUS</text>
 
-            <rect x="900" y="240" width="270" height="480" rx="20" fill="#0F172A" fill-opacity="0.7" stroke="#334155" stroke-width="1.5" stroke-dasharray="6 6"/>
-            <text x="925" y="270" fill="#64748B" font-size="14" font-weight="900" letter-spacing="1.5">EAST CAMPUS</text>
+            <rect x="900" y="240" width="270" height="480" rx="20" fill="#1F2022" fill-opacity="0.8" stroke="#343537" stroke-width="1.5" stroke-dasharray="6 6"/>
+            <text x="925" y="270" fill="#94A3B8" font-size="14" font-weight="900" letter-spacing="1.5">EAST CAMPUS</text>
 
-            <rect x="50" y="520" width="260" height="240" rx="20" fill="#0F172A" fill-opacity="0.7" stroke="#334155" stroke-width="1.5" stroke-dasharray="6 6"/>
-            <text x="75" y="550" fill="#64748B" font-size="14" font-weight="900" letter-spacing="1.5">SOUTH CAMPUS</text>
+            <rect x="50" y="520" width="260" height="240" rx="20" fill="#1F2022" fill-opacity="0.8" stroke="#343537" stroke-width="1.5" stroke-dasharray="6 6"/>
+            <text x="75" y="550" fill="#94A3B8" font-size="14" font-weight="900" letter-spacing="1.5">SOUTH CAMPUS</text>
 
             <!-- Roads -->
             <rect x="20" y="200" width="1160" height="28" rx="8" fill="#1E293B"/>
@@ -139,7 +203,7 @@
             <!-- BUILDINGS -->
             <!-- 1. University Administration -->
             <g class="map-building" data-id="univ_office">
-              <rect class="bldg-card" x="910" y="45" width="230" height="135" rx="16" fill="#0F172A" stroke="#3B82F6" stroke-width="2"/>
+              <rect class="bldg-card" x="910" y="45" width="230" height="135" rx="16" fill="#1F2022" stroke="#3B82F6" stroke-width="2"/>
               <rect x="910" y="45" width="230" height="40" rx="16" fill="#1E3A8A"/>
               <circle cx="935" cy="65" r="14" fill="#3B82F6"/>
               <text x="935" y="70" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle">1</text>
@@ -150,7 +214,7 @@
 
             <!-- 2. VentureStudio -->
             <g class="map-building" data-id="venturestudio">
-              <rect class="bldg-card" x="400" y="60" width="240" height="120" rx="16" fill="#0F172A" stroke="#9333EA" stroke-width="2"/>
+              <rect class="bldg-card" x="400" y="60" width="240" height="120" rx="16" fill="#1F2022" stroke="#9333EA" stroke-width="2"/>
               <rect x="400" y="60" width="240" height="38" rx="16" fill="#581C87"/>
               <circle cx="425" cy="79" r="14" fill="#9333EA"/>
               <text x="425" y="84" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle">2</text>
@@ -159,23 +223,23 @@
               <text x="420" y="142" fill="#94A3B8" font-size="12">Café VentureStudio</text>
             </g>
 
-            <!-- 9. University Centre (UC) -->
+            <!-- 9. University Centre (UC) - Signature Stitch Red Card -->
             <g class="map-building selected" data-id="uc">
-              <rect class="bldg-card" x="520" y="470" width="200" height="195" rx="18" fill="#180A0D" stroke="#8C1D24" stroke-width="3"/>
-              <rect x="520" y="470" width="200" height="45" rx="18" fill="#8C1D24"/>
+              <rect class="bldg-card" x="520" y="470" width="200" height="195" rx="18" fill="#1F2022" stroke="#d71920" stroke-width="3"/>
+              <rect x="520" y="470" width="200" height="45" rx="18" fill="#d71920"/>
               <circle cx="545" cy="492" r="15" fill="#FFFFFF"/>
-              <text x="545" y="497" fill="#8C1D24" font-size="13" font-weight="900" text-anchor="middle">9</text>
+              <text x="545" y="497" fill="#d71920" font-size="13" font-weight="900" text-anchor="middle">9</text>
               <text x="570" y="498" fill="#FFFFFF" font-size="15" font-weight="900">University Centre</text>
               <text x="540" y="540" fill="#FFFFFF" font-size="13" font-weight="bold">Health Centre (1st Fl)</text>
               <text x="540" y="562" fill="#FFFFFF" font-size="13" font-weight="bold">ODS & Wellness (2nd Fl)</text>
               <text x="540" y="584" fill="#FFFFFF" font-size="13" font-weight="bold">CDC Careers (4th Fl)</text>
-              <text x="540" y="606" fill="#FECACA" font-size="12">Food Court • Bookstore</text>
-              <text x="540" y="626" fill="#FECACA" font-size="12">Gymnasium & Silent Study</text>
+              <text x="540" y="606" fill="#ffb4ab" font-size="12">Food Court • Bookstore</text>
+              <text x="540" y="626" fill="#ffb4ab" font-size="12">Gymnasium & Silent Study</text>
             </g>
 
             <!-- 10. GICT Building (SEAS) -->
             <g class="map-building" data-id="gict">
-              <rect class="bldg-card" x="370" y="400" width="130" height="200" rx="16" fill="#0F172A" stroke="#0284C7" stroke-width="2"/>
+              <rect class="bldg-card" x="370" y="400" width="130" height="200" rx="16" fill="#1F2022" stroke="#0284C7" stroke-width="2"/>
               <rect x="370" y="400" width="130" height="42" rx="16" fill="#0369A1"/>
               <circle cx="395" cy="421" r="14" fill="#0284C7"/>
               <text x="395" y="426" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle">10</text>
@@ -188,7 +252,7 @@
 
             <!-- 8. School of Arts and Sciences (SAS) -->
             <g class="map-building" data-id="sas">
-              <rect class="bldg-card" x="710" y="320" width="145" height="140" rx="16" fill="#0F172A" stroke="#0D9488" stroke-width="2"/>
+              <rect class="bldg-card" x="710" y="320" width="145" height="140" rx="16" fill="#1F2022" stroke="#0D9488" stroke-width="2"/>
               <rect x="710" y="320" width="145" height="40" rx="16" fill="#0F766E"/>
               <circle cx="732" cy="340" r="14" fill="#0D9488"/>
               <text x="732" y="345" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle">8</text>
@@ -200,7 +264,7 @@
 
             <!-- 6. AMSOM -->
             <g class="map-building" data-id="amsom">
-              <rect class="bldg-card" x="740" y="500" width="120" height="140" rx="16" fill="#0F172A" stroke="#D97706" stroke-width="2"/>
+              <rect class="bldg-card" x="740" y="500" width="120" height="140" rx="16" fill="#1F2022" stroke="#D97706" stroke-width="2"/>
               <rect x="740" y="500" width="120" height="40" rx="16" fill="#B45309"/>
               <circle cx="762" cy="520" r="14" fill="#D97706"/>
               <text x="762" y="525" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle">6</text>
@@ -220,7 +284,7 @@
 
             <!-- 11. Undergraduate / HL -->
             <g class="map-building" data-id="undergrad_hl">
-              <rect class="bldg-card" x="925" y="460" width="225" height="150" rx="16" fill="#0F172A" stroke="#4F46E5" stroke-width="2"/>
+              <rect class="bldg-card" x="925" y="460" width="225" height="150" rx="16" fill="#1F2022" stroke="#4F46E5" stroke-width="2"/>
               <rect x="925" y="460" width="225" height="40" rx="16" fill="#3730A3"/>
               <circle cx="950" cy="480" r="14" fill="#4F46E5"/>
               <text x="950" y="485" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle">11</text>
@@ -232,7 +296,7 @@
 
             <!-- 3. Bio Lab -->
             <g class="map-building" data-id="bio_lab">
-              <rect class="bldg-card" x="70" y="580" width="210" height="120" rx="16" fill="#0F172A" stroke="#059669" stroke-width="2"/>
+              <rect class="bldg-card" x="70" y="580" width="210" height="120" rx="16" fill="#1F2022" stroke="#059669" stroke-width="2"/>
               <rect x="70" y="580" width="210" height="38" rx="16" fill="#065F46"/>
               <circle cx="95" cy="599" r="14" fill="#059669"/>
               <text x="95" y="604" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle">3</text>
@@ -243,7 +307,7 @@
 
             <!-- 15. Sports Complex -->
             <g class="map-building" data-id="sports_complex">
-              <rect class="bldg-card" x="35" y="270" width="250" height="155" rx="16" fill="#0F172A" stroke="#047857" stroke-width="2"/>
+              <rect class="bldg-card" x="35" y="270" width="250" height="155" rx="16" fill="#1F2022" stroke="#047857" stroke-width="2"/>
               <rect x="35" y="270" width="250" height="40" rx="16" fill="#064E3B"/>
               <circle cx="60" cy="290" r="14" fill="#047857"/>
               <text x="60" y="295" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle">15</text>
@@ -255,41 +319,41 @@
 
             <!-- GATES -->
             <g class="gate-marker" data-gate="10">
-              <circle cx="865" cy="400" r="18" fill="#EF4444" stroke="#FFFFFF" stroke-width="3"/>
+              <circle cx="865" cy="400" r="18" fill="#d71920" stroke="#FFFFFF" stroke-width="3"/>
               <text x="865" y="405" fill="#FFFFFF" font-size="12" font-weight="900" text-anchor="middle">G10</text>
             </g>
             <g class="gate-marker" data-gate="12">
-              <circle cx="600" cy="200" r="17" fill="#D97706" stroke="#FFFFFF" stroke-width="3"/>
-              <text x="600" y="205" fill="#FFFFFF" font-size="11" font-weight="bold" text-anchor="middle">G12</text>
+              <circle cx="600" cy="200" r="17" fill="#F1C40F" stroke="#121315" stroke-width="2.5"/>
+              <text x="600" y="205" fill="#121315" font-size="11" font-weight="bold" text-anchor="middle">G12</text>
             </g>
             <g class="gate-marker" data-gate="6">
-              <circle cx="360" cy="670" r="17" fill="#D97706" stroke="#FFFFFF" stroke-width="3"/>
-              <text x="360" y="675" fill="#FFFFFF" font-size="11" font-weight="bold" text-anchor="middle">G6</text>
+              <circle cx="360" cy="670" r="17" fill="#F1C40F" stroke="#121315" stroke-width="2.5"/>
+              <text x="360" y="675" fill="#121315" font-size="11" font-weight="bold" text-anchor="middle">G6</text>
             </g>
             <g class="gate-marker" data-gate="7">
-              <circle cx="880" cy="670" r="17" fill="#D97706" stroke="#FFFFFF" stroke-width="3"/>
-              <text x="880" y="675" fill="#FFFFFF" font-size="11" font-weight="bold" text-anchor="middle">G7</text>
+              <circle cx="880" cy="670" r="17" fill="#F1C40F" stroke="#121315" stroke-width="2.5"/>
+              <text x="880" y="675" fill="#121315" font-size="11" font-weight="bold" text-anchor="middle">G7</text>
             </g>
             <g class="gate-marker" data-gate="8">
-              <circle cx="920" cy="400" r="17" fill="#D97706" stroke="#FFFFFF" stroke-width="3"/>
-              <text x="920" y="405" fill="#FFFFFF" font-size="11" font-weight="bold" text-anchor="middle">G8</text>
+              <circle cx="920" cy="400" r="17" fill="#F1C40F" stroke="#121315" stroke-width="2.5"/>
+              <text x="920" y="405" fill="#121315" font-size="11" font-weight="bold" text-anchor="middle">G8</text>
             </g>
             <g class="gate-marker" data-gate="3">
-              <circle cx="650" cy="30" r="17" fill="#D97706" stroke="#FFFFFF" stroke-width="3"/>
-              <text x="650" y="35" fill="#FFFFFF" font-size="11" font-weight="bold" text-anchor="middle">G3</text>
+              <circle cx="650" cy="30" r="17" fill="#F1C40F" stroke="#121315" stroke-width="2.5"/>
+              <text x="650" y="35" fill="#121315" font-size="11" font-weight="bold" text-anchor="middle">G3</text>
             </g>
             <g class="gate-marker" data-gate="5">
-              <circle cx="170" cy="520" r="17" fill="#D97706" stroke="#FFFFFF" stroke-width="3"/>
-              <text x="170" y="525" fill="#FFFFFF" font-size="11" font-weight="bold" text-anchor="middle">G5</text>
+              <circle cx="170" cy="520" r="17" fill="#F1C40F" stroke="#121315" stroke-width="2.5"/>
+              <text x="170" y="525" fill="#121315" font-size="11" font-weight="bold" text-anchor="middle">G5</text>
             </g>
             <g class="gate-marker" data-gate="15">
-              <circle cx="35" cy="240" r="17" fill="#D97706" stroke="#FFFFFF" stroke-width="3"/>
-              <text x="35" y="245" fill="#FFFFFF" font-size="11" font-weight="bold" text-anchor="middle">G15</text>
+              <circle cx="35" cy="240" r="17" fill="#F1C40F" stroke="#121315" stroke-width="2.5"/>
+              <text x="35" y="245" fill="#121315" font-size="11" font-weight="bold" text-anchor="middle">G15</text>
             </g>
           </svg>
         </div>
 
-        <!-- Details Card (5 cols on desktop) -->
+        <!-- Details Card -->
         <div id="building-details" class="lg:col-span-5">
           <!-- Rendered by selectBuilding -->
         </div>
@@ -298,13 +362,13 @@
 
     <!-- 3. DIRECTORY TAB -->
     <section id="tab-directory" class="tab-content space-y-3">
-      <!-- Search & Filters at Top -->
+      <!-- Search & Filters -->
       <div class="shrink-0 flex flex-col sm:flex-row gap-2.5">
         <div class="relative flex-1">
-          <svg class="w-4 h-4 absolute left-3.5 top-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-          <input id="directory-search" type="text" placeholder="Search major (e.g. CSE, Finance, Economics, Physics)..." class="w-full pl-10 pr-4 py-2 text-xs sm:text-sm bg-[#0F172A] border border-white/10 rounded-xl outline-none text-white placeholder-slate-500 focus:border-red-500 transition-all shadow-xs">
+          <span class="material-symbols-outlined absolute left-3.5 top-2.5 text-on-surface-variant text-lg">search</span>
+          <input id="directory-search" type="text" placeholder="Search major (e.g. CSE, Finance, Economics, Physics)..." class="w-full pl-11 pr-4 py-2 text-xs md:text-sm bg-surface-container-high border border-white/10 rounded-xl outline-none text-white placeholder-on-surface-variant focus:border-primary transition-all shadow-xs">
         </div>
-        <select id="school-filter" class="text-xs sm:text-sm px-3 py-2 bg-[#0F172A] border border-white/10 rounded-xl outline-none text-white shadow-xs">
+        <select id="school-filter" class="text-xs md:text-sm px-3 py-2 bg-surface-container-high border border-white/10 rounded-xl outline-none text-white shadow-xs">
           <option value="all">All Schools & Centres</option>
           <option value="Engineering">School of Engineering (SEAS)</option>
           <option value="Arts and Sciences">School of Arts & Sciences (SAS)</option>
@@ -316,23 +380,21 @@
       <div id="directory-list" class="flex-1 overflow-y-auto pane-scroll space-y-3 pr-1 pb-4"></div>
     </section>
 
-    <!-- 4. STUDENT TOOLS TAB -->
+    <!-- 4. STUDENT TOOLS TAB (Stitch Bento Design) -->
     <section id="tab-tools" class="tab-content overflow-y-auto pane-scroll space-y-4 pr-1 pb-6">
       
-      <!-- ATTENDANCE CALCULATOR -->
-      <div class="p-4 sm:p-5 rounded-2xl border border-white/10 bg-[#0F172A] shadow-xl">
-        <div class="flex items-center gap-2.5 mb-3.5">
-          <span class="p-2.5 bg-red-950 text-red-300 border border-red-500/40 rounded-xl text-xs font-bold">📉</span>
-          <div>
-            <h3 class="font-bold text-sm sm:text-base text-white">Attendance & Grade Drop Simulator</h3>
-            <p class="text-[11px] text-slate-400">Calculate exact safe absences before a 1-grade drop or NP grade</p>
-          </div>
+      <!-- ATTENDANCE SIMULATOR -->
+      <div class="glass-panel p-4 md:p-6 rounded-xl border border-white/10 shadow-xl">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="text-2xl">📉</span>
+          <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">Attendance &amp; Grade Drop Simulator</h2>
         </div>
+        <p class="text-xs text-on-surface-variant mb-4 font-label-mono uppercase tracking-wider">Calculate exact safe absences before a 1-grade drop or NP grade</p>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-3.5">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
           <div>
-            <label class="text-[10px] font-bold text-slate-400 block mb-1 uppercase tracking-wider">Course Credits</label>
-            <select id="att-credits" class="w-full text-xs sm:text-sm p-2.5 bg-[#080C14] border border-white/10 rounded-lg text-white outline-none focus:border-red-500">
+            <label class="block text-xs text-on-surface-variant mb-1 font-label-mono">Course Credits</label>
+            <select id="att-credits" class="input-dark w-full p-2.5 rounded-lg text-sm">
               <option value="4">4.0 Credits (45 Sessions)</option>
               <option value="3" selected>3.0 Credits (30 Sessions)</option>
               <option value="2">2.0 Credits (20 Sessions)</option>
@@ -341,138 +403,155 @@
             </select>
           </div>
           <div>
-            <label class="text-[10px] font-bold text-slate-400 block mb-1 uppercase tracking-wider">Total Sessions</label>
-            <input id="att-total" type="number" value="30" class="w-full text-xs sm:text-sm p-2.5 bg-[#080C14] border border-white/10 rounded-lg text-white outline-none focus:border-red-500">
+            <label class="block text-xs text-on-surface-variant mb-1 font-label-mono">Total Sessions</label>
+            <input id="att-total" type="number" value="30" class="input-dark w-full p-2.5 rounded-lg text-sm">
           </div>
           <div>
-            <label class="text-[10px] font-bold text-slate-400 block mb-1 uppercase tracking-wider">Classes Missed</label>
-            <input id="att-missed" type="number" value="4" min="0" class="w-full text-xs sm:text-sm p-2.5 bg-[#080C14] border border-white/10 rounded-lg text-white outline-none focus:border-red-500">
+            <label class="block text-xs text-on-surface-variant mb-1 font-label-mono">Classes Missed</label>
+            <input id="att-missed" type="number" value="4" min="0" class="input-dark w-full p-2.5 rounded-lg text-sm font-bold text-primary">
           </div>
         </div>
 
         <div id="att-result"></div>
       </div>
 
-      <!-- GPA ESTIMATOR -->
-      <div class="p-4 sm:p-5 rounded-2xl border border-white/10 bg-[#0F172A] shadow-xl">
-        <div class="flex items-center justify-between mb-3.5">
-          <div class="flex items-center gap-2.5">
-            <span class="p-2.5 bg-amber-950 text-amber-300 border border-amber-500/40 rounded-xl text-xs font-bold">🎓</span>
-            <div>
-              <h3 class="font-bold text-sm sm:text-base text-white">AU GPA / SGPA Calculator (4.00 Scale)</h3>
-              <p class="text-[11px] text-slate-400">Estimate semester performance on AU grade points</p>
+      <!-- GPA ESTIMATOR & CALENDAR (Bento Grid) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Quick GPA Tool -->
+        <div class="glass-panel p-4 md:p-6 rounded-xl border border-white/10 shadow-xl flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center gap-2">
+                <span class="text-2xl">🎓</span>
+                <h2 class="font-title-md text-title-md text-primary">AU GPA / SGPA Calculator</h2>
+              </div>
+              <button id="add-course-btn" class="px-3 py-1 bg-white/10 hover:bg-white/20 text-xs font-bold rounded-lg text-white transition-all active:scale-95 border border-white/10">
+                + Add Course
+              </button>
             </div>
+            <p class="text-xs text-on-surface-variant mb-4 font-label-mono uppercase tracking-wider">(4.00 Scale) Estimate semester performance</p>
+            <div id="gpa-course-list" class="space-y-2 mb-3"></div>
           </div>
-          <button id="add-course-btn" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-xs font-bold rounded-lg text-white transition-all active:scale-95 border border-white/10">
-            + Add Course
-          </button>
+          <div id="gpa-result"></div>
         </div>
 
-        <div id="gpa-course-list" class="space-y-2 mb-3.5"></div>
-        <div id="gpa-result"></div>
-      </div>
-
-      <!-- ACADEMIC CALENDAR -->
-      <div class="p-4 sm:p-5 rounded-2xl border border-white/10 bg-[#0F172A] shadow-xl">
-        <div class="flex items-center justify-between mb-3.5">
-          <div class="flex items-center gap-2.5">
-            <span class="p-2.5 bg-red-950 text-red-300 border border-red-500/40 rounded-xl text-xs font-bold">📅</span>
-            <div>
-              <h3 class="font-bold text-sm sm:text-base text-white">Academic Calendar (2026–2027)</h3>
-              <p class="text-[11px] text-slate-400">Official semester milestones, exams & breaks</p>
+        <!-- Academic Calendar -->
+        <div class="glass-panel p-4 md:p-6 rounded-xl border border-white/10 shadow-xl flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center gap-2">
+                <span class="text-2xl">📅</span>
+                <h2 class="font-title-md text-title-md text-primary">Academic Calendar</h2>
+              </div>
+              <select id="sem-filter" class="input-dark text-xs px-2.5 py-1 rounded-lg">
+                <option value="monsoon2026">Monsoon 2026</option>
+                <option value="winter2027">Winter 2027</option>
+                <option value="summer2027">Summer 2027</option>
+              </select>
             </div>
+            <p class="text-xs text-on-surface-variant mb-4 font-label-mono uppercase tracking-wider">(2026–2027) Milestones, exams &amp; breaks</p>
+            <div id="calendar-events-list"></div>
           </div>
-          <select id="sem-filter" class="text-xs sm:text-sm px-3 py-1.5 bg-[#080C14] border border-white/10 rounded-lg text-white outline-none">
-            <option value="monsoon2026">Monsoon 2026</option>
-            <option value="winter2027">Winter 2027</option>
-            <option value="summer2027">Summer 2027</option>
-          </select>
         </div>
-
-        <div id="calendar-events-list"></div>
       </div>
 
     </section>
 
   </main>
 
-  <!-- MOBILE BOTTOM NAVIGATION -->
-  <nav class="md:hidden shrink-0 z-40 bg-[#080C14] px-3 py-1.5 flex items-center justify-around shadow-lg border-t border-white/10">
-    <button data-tab="chat" class="nav-btn active-tab flex flex-col items-center gap-0.5 text-[11px] p-1 transition-all">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-      <span>AUGI</span>
+  <!-- BOTTOM NAVIGATION (Mobile Only - Stitch Bottom Bar) -->
+  <nav class="md:hidden shrink-0 z-50 bg-surface-container-highest/90 backdrop-blur-lg border-t border-white/10 shadow-2xl flex justify-around items-center h-16 px-4 font-label-mono text-label-mono">
+    <button data-tab="chat" class="nav-btn active-tab flex flex-col items-center justify-center bg-primary-container/20 text-primary rounded-xl px-3 py-1 transition-all">
+      <span class="material-symbols-outlined filled text-xl">chat_bubble</span>
+      <span class="text-[10px] mt-0.5">Assistant</span>
     </button>
 
-    <button data-tab="map" class="nav-btn flex flex-col items-center gap-0.5 text-slate-400 text-[11px] p-1 transition-all">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
-      <span>Map</span>
+    <button data-tab="map" class="nav-btn flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 transition-all">
+      <span class="material-symbols-outlined text-xl">explore</span>
+      <span class="text-[10px] mt-0.5">Map</span>
     </button>
 
-    <button data-tab="directory" class="nav-btn flex flex-col items-center gap-0.5 text-slate-400 text-[11px] p-1 transition-all">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-      <span>Advisors</span>
+    <button data-tab="directory" class="nav-btn flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 transition-all">
+      <span class="material-symbols-outlined text-xl">group</span>
+      <span class="text-[10px] mt-0.5">Advisors</span>
     </button>
 
-    <button data-tab="tools" class="nav-btn flex flex-col items-center gap-0.5 text-slate-400 text-[11px] p-1 transition-all">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-      <span>Tools</span>
+    <button data-tab="tools" class="nav-btn flex flex-col items-center justify-center text-on-surface-variant px-3 py-1 transition-all">
+      <span class="material-symbols-outlined text-xl">handyman</span>
+      <span class="text-[10px] mt-0.5">Tools</span>
     </button>
   </nav>
 
-  <!-- EMERGENCY SOS MODAL -->
+  <!-- FLOATING SOS (Mobile Specific) -->
+  <button class="open-sos-btn md:hidden fixed bottom-20 right-4 z-40 bg-sos-red w-13 h-13 rounded-full shadow-[0_0_15px_rgba(255,77,77,0.4)] flex items-center justify-center text-white active:scale-90 transition-transform animate-pulse-sos">
+    <span class="material-symbols-outlined filled text-2xl">emergency</span>
+  </button>
+
+  <!-- EMERGENCY SOS MODAL (Stitch Design System) -->
   <div id="sos-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-end sm:items-center justify-center p-3 sm:p-4">
-    <div class="modal-anim w-full max-w-md rounded-3xl p-5 border border-red-500/40 shadow-2xl space-y-3.5 max-h-[90vh] overflow-y-auto bg-[#0F172A]">
-      <div class="flex items-center justify-between pb-2.5 border-b border-white/10">
-        <div class="flex items-center gap-2 text-red-400">
-          <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping"></span>
-          <h2 class="font-black text-sm sm:text-base tracking-tight text-white">Campus Emergency SOS</h2>
+    <div class="glass-panel w-full max-w-md rounded-2xl p-5 border border-sos-red/30 shadow-2xl space-y-3 max-h-[90vh] overflow-y-auto">
+      <div class="bg-sos-red/10 p-3.5 rounded-xl border border-sos-red/20 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined filled text-sos-red">emergency</span>
+          <div>
+            <h2 class="font-title-md text-title-md text-sos-red font-bold">Campus Emergency SOS</h2>
+            <p class="text-xs text-on-surface-variant">Tap to dial immediately</p>
+          </div>
         </div>
-        <button id="close-sos-btn" class="text-slate-400 hover:text-white p-1 rounded-xl hover:bg-white/10 transition-colors">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        <button id="close-sos-btn" class="text-on-surface-variant hover:text-white p-1 rounded-xl hover:bg-white/10 transition-colors">
+          <span class="material-symbols-outlined">close</span>
         </button>
       </div>
 
-      <p class="text-xs text-slate-400">Tap to dial immediately or send an emergency report:</p>
-
-      <div class="space-y-2">
-        <a href="tel:+919998800237" class="flex items-center justify-between p-3 bg-red-950/60 hover:bg-red-950/90 border border-red-500/40 rounded-xl transition-all">
+      <div class="space-y-2 divide-y divide-white/5">
+        <a href="tel:+919998800237" class="flex items-center justify-between p-3 hover:bg-white/5 rounded-xl transition-colors group">
           <div>
-            <h4 class="font-bold text-xs text-red-200">Campus Security Supervisor (24h)</h4>
-            <p class="text-[11px] text-red-300 font-mono mt-0.5 font-bold">+91.9998800237</p>
+            <div class="text-sm font-bold text-on-surface group-hover:text-sos-red transition-colors">Campus Security Supervisor (24h)</div>
+            <div class="text-xs text-on-surface-variant font-label-mono">+91.9998800237</div>
           </div>
-          <span class="px-2.5 py-1 bg-red-600 hover:bg-red-500 text-white rounded-lg text-xs font-bold shadow-xs">Call 24/7</span>
+          <div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:bg-sos-red/20 group-hover:text-sos-red">
+            <span class="material-symbols-outlined text-sm">call</span>
+          </div>
         </a>
 
-        <a href="tel:+9107961911026" class="flex items-center justify-between p-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl transition-all">
+        <a href="tel:+9107961911026" class="flex items-center justify-between p-3 hover:bg-white/5 rounded-xl transition-colors group pt-2">
           <div>
-            <h4 class="font-bold text-xs text-white">University Doctor (Dr. Gayatri Raval)</h4>
-            <p class="text-[11px] text-slate-400 mt-0.5">Health Centre, 1st Floor UC</p>
+            <div class="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">University Doctor (Dr. Gayatri Raval)</div>
+            <div class="text-xs text-on-surface-variant">Health Centre, 1st Floor UC</div>
           </div>
-          <span class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-xs font-bold border border-white/10">Call</span>
+          <div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:bg-primary/20 group-hover:text-primary">
+            <span class="material-symbols-outlined text-sm">call</span>
+          </div>
         </a>
 
-        <a href="tel:18001805522" class="flex items-center justify-between p-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl transition-all">
+        <a href="tel:18001805522" class="flex items-center justify-between p-3 hover:bg-white/5 rounded-xl transition-colors group pt-2">
           <div>
-            <h4 class="font-bold text-xs text-white">Anti-Ragging Helpline (Toll-Free)</h4>
-            <p class="text-[11px] text-slate-400 font-mono mt-0.5">1800.180.5522</p>
+            <div class="text-sm font-bold text-on-surface group-hover:text-warning-amber transition-colors">Anti-Ragging Helpline (Toll-Free)</div>
+            <div class="text-xs text-on-surface-variant font-label-mono">1800.180.5522</div>
           </div>
-          <span class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-xs font-bold border border-white/10">Call</span>
+          <div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:bg-warning-amber/20 group-hover:text-warning-amber">
+            <span class="material-symbols-outlined text-sm">call</span>
+          </div>
         </a>
 
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=posh@ahduni.edu.in&su=Confidential%20Inquiry%20-%20POSH" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl transition-all">
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=posh@ahduni.edu.in&su=Confidential%20Inquiry%20-%20POSH" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3 hover:bg-white/5 rounded-xl transition-colors group pt-2">
           <div>
-            <h4 class="font-bold text-xs text-white">POSH (Internal Complaints)</h4>
-            <p class="text-[11px] text-slate-400 font-mono mt-0.5">posh@ahduni.edu.in</p>
+            <div class="text-sm font-bold text-on-surface group-hover:text-primary transition-colors">POSH (Internal Complaints)</div>
+            <div class="text-xs text-on-surface-variant font-label-mono">posh@ahduni.edu.in</div>
           </div>
-          <span class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-xs font-bold border border-white/10">Gmail</span>
+          <div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:bg-primary/20 group-hover:text-primary">
+            <span class="material-symbols-outlined text-sm">mail</span>
+          </div>
         </a>
 
-        <a href="tel:108" class="flex items-center justify-between p-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl transition-all">
+        <a href="tel:108" class="flex items-center justify-between p-3 hover:bg-white/5 rounded-xl transition-colors group pt-2">
           <div>
-            <h4 class="font-bold text-xs text-white">Emergency Ambulance</h4>
-            <p class="text-[11px] text-slate-400 font-mono mt-0.5">108</p>
+            <div class="text-sm font-bold text-on-surface group-hover:text-sos-red transition-colors">Emergency Ambulance</div>
+            <div class="text-xs text-on-surface-variant font-label-mono">108</div>
           </div>
-          <span class="px-2.5 py-1 bg-red-600 hover:bg-red-500 text-white rounded-lg text-xs font-bold">Call</span>
+          <div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:bg-sos-red/20 group-hover:text-sos-red">
+            <span class="material-symbols-outlined text-sm">emergency</span>
+          </div>
         </a>
       </div>
     </div>
