@@ -269,15 +269,14 @@ document.addEventListener("DOMContentLoaded", () => {
     TAB_ORDER.forEach((id, idx) => {
       const el = document.getElementById(`tab-${id}`);
       if (!el) return;
-      const isTools = id === "tools";
-      const baseClass = isTools ? "tab-content overflow-y-auto pane-scroll space-y-4 pr-1 pb-8" : "tab-content space-y-3";
+      el.classList.remove("active", "slide-left", "slide-right");
 
       if (idx === targetIdx) {
-        el.className = `${baseClass} active`;
+        el.classList.add("active");
       } else if (idx < targetIdx) {
-        el.className = `${baseClass} slide-left`;
+        el.classList.add("slide-left");
       } else {
-        el.className = `${baseClass} slide-right`;
+        el.classList.add("slide-right");
       }
     });
 
