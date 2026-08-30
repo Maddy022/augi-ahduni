@@ -3,8 +3,13 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+  <meta name="theme-color" content="#d71920"/>
+  <meta name="referrer" content="strict-origin-when-cross-origin"/>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com https://lh3.googleusercontent.com; img-src 'self' data: https:; media-src 'self';">
+  
   <title>AUGI - Ahmedabad University Campus Assistant</title>
   
+  <link rel="manifest" href="manifest.json"/>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   
@@ -125,9 +130,21 @@
       </button>
     </nav>
 
-    <!-- Header Actions -->
-    <div class="flex items-center gap-3">
-      <button class="open-sos-btn bg-primary-container text-on-primary-container px-4 md:px-6 py-1.5 md:py-2 rounded-full font-title-md font-bold text-xs md:text-sm flex items-center gap-2 hover:brightness-110 active:scale-95 transition-all animate-pulse-sos shadow-lg shadow-red-900/50">
+    <!-- Header Actions (Privacy Shield, Quick Exit & SOS) -->
+    <div class="flex items-center gap-2 md:gap-3">
+      <!-- Privacy & Security Settings Button -->
+      <button id="open-privacy-btn" class="p-2 text-on-surface-variant hover:text-primary rounded-xl hover:bg-white/5 transition-all border border-white/5" title="Privacy & Data Shield">
+        <span class="material-symbols-outlined text-lg">shield</span>
+      </button>
+
+      <!-- Quick Exit Button -->
+      <button id="quick-exit-btn" class="hidden sm:flex items-center gap-1 px-2.5 py-1.5 bg-surface-container hover:bg-surface-bright text-on-surface-variant hover:text-white rounded-xl text-xs font-label-mono border border-white/10 transition-all" title="Press Esc to Exit to University Website">
+        <span class="material-symbols-outlined text-xs">logout</span>
+        <span>Quick Exit (Esc)</span>
+      </button>
+
+      <!-- Emergency SOS Button -->
+      <button class="open-sos-btn bg-primary-container text-on-primary-container px-3.5 md:px-5 py-1.5 md:py-2 rounded-full font-title-md font-bold text-xs md:text-sm flex items-center gap-1.5 hover:brightness-110 active:scale-95 transition-all animate-pulse-sos shadow-lg shadow-red-900/50">
         <span class="material-symbols-outlined filled text-sm md:text-base">emergency</span>
         <span>SOS</span>
       </button>
@@ -158,18 +175,46 @@
       </div>
     </section>
 
-    <!-- 2. CAMPUS MAP TAB (Stitch Redesign Vector + Dark Blueprint) -->
+    <!-- 2. CAMPUS MAP TAB (With Wayfinding & Routing) -->
     <section id="tab-map" class="tab-content space-y-3">
-      <!-- Search Bar -->
-      <div class="shrink-0 relative w-full">
-        <span class="material-symbols-outlined absolute left-3.5 top-2.5 text-on-surface-variant text-lg">search</span>
-        <input id="map-search" type="text" placeholder="Search buildings, CDC, Library, Gates, Food Court..." class="w-full pl-11 pr-4 py-2 text-xs md:text-sm bg-surface-container-high border border-white/10 rounded-xl outline-none text-white placeholder-on-surface-variant focus:border-primary transition-all shadow-xs">
+      <!-- Search & Wayfinding Header -->
+      <div class="shrink-0 glass-panel p-2.5 rounded-xl border border-white/10 flex flex-col sm:flex-row gap-2.5 items-center justify-between">
+        <!-- Search input -->
+        <div class="relative flex-1 w-full">
+          <span class="material-symbols-outlined absolute left-3 top-2 text-on-surface-variant text-base">search</span>
+          <input id="map-search" type="text" placeholder="Search buildings, CDC, Library, Gates, Food Court..." class="w-full pl-9 pr-3 py-1.5 text-xs md:text-sm bg-surface-container border border-white/10 rounded-lg outline-none text-white placeholder-on-surface-variant focus:border-primary transition-all">
+        </div>
+
+        <!-- Wayfinding Quick Selector -->
+        <div class="flex items-center gap-2 w-full sm:w-auto">
+          <select id="route-start" class="input-dark text-xs p-1.5 rounded-lg flex-1 sm:flex-none">
+            <option value="g10">Start: Gate 10 (Main)</option>
+            <option value="g12">Start: Gate 12 (UC)</option>
+            <option value="g6">Start: Gate 6 (Central)</option>
+            <option value="g3">Start: Gate 3 (North)</option>
+            <option value="g8">Start: Gate 8 (East)</option>
+            <option value="g15">Start: Gate 15 (Sports)</option>
+          </select>
+          <select id="route-dest" class="input-dark text-xs p-1.5 rounded-lg flex-1 sm:flex-none">
+            <option value="uc">Dest: University Centre (UC)</option>
+            <option value="gict">Dest: GICT / Central Library</option>
+            <option value="sas">Dest: SAS Arts & Sciences</option>
+            <option value="amsom">Dest: AMSOM Management</option>
+            <option value="undergrad_hl">Dest: Undergrad / HL Bldg</option>
+            <option value="sports_complex">Dest: Sports Complex</option>
+            <option value="venturestudio">Dest: VentureStudio</option>
+          </select>
+          <button id="find-route-btn" class="px-3 py-1.5 bg-primary-container text-on-primary-container text-xs font-bold rounded-lg flex items-center gap-1 hover:brightness-110 active:scale-95 transition-all shadow-sm shrink-0">
+            <span class="material-symbols-outlined text-xs">directions_walk</span>
+            Route
+          </button>
+        </div>
       </div>
 
       <!-- Map & Details Grid -->
       <div class="flex-1 overflow-y-auto pane-scroll grid grid-cols-1 lg:grid-cols-12 gap-3.5 items-start pr-1 pb-4">
         <!-- SVG Map Container -->
-        <div class="lg:col-span-7 bg-[#080C14] rounded-2xl overflow-hidden border border-white/10 shadow-lg p-2 aspect-[16/11]">
+        <div class="lg:col-span-7 bg-[#080C14] rounded-2xl overflow-hidden border border-white/10 shadow-lg p-2 aspect-[16/11] relative">
           <svg id="campus-map-svg" viewBox="0 0 1200 800" class="w-full h-full">
             <defs>
               <pattern id="campus-grid-dark" width="50" height="50" patternUnits="userSpaceOnUse">
@@ -200,6 +245,9 @@
             <rect x="880" y="210" width="22" height="560" rx="6" fill="#1E293B"/>
             <text x="896" y="480" fill="#94A3B8" font-size="12" font-weight="900" transform="rotate(90 896 480)" letter-spacing="1">S V DESAI ROAD</text>
 
+            <!-- Animated Route Layer -->
+            <g id="svg-route-layer"></g>
+
             <!-- BUILDINGS -->
             <!-- 1. University Administration -->
             <g class="map-building" data-id="univ_office">
@@ -223,7 +271,7 @@
               <text x="420" y="142" fill="#94A3B8" font-size="12">Café VentureStudio</text>
             </g>
 
-            <!-- 9. University Centre (UC) - Signature Stitch Red Card -->
+            <!-- 9. University Centre (UC) -->
             <g class="map-building selected" data-id="uc">
               <rect class="bldg-card" x="520" y="470" width="200" height="195" rx="18" fill="#1F2022" stroke="#d71920" stroke-width="3"/>
               <rect x="520" y="470" width="200" height="45" rx="18" fill="#d71920"/>
@@ -353,9 +401,9 @@
           </svg>
         </div>
 
-        <!-- Details Card -->
-        <div id="building-details" class="lg:col-span-5">
-          <!-- Rendered by selectBuilding -->
+        <!-- Details Card / Navigation Directions -->
+        <div id="building-details" class="lg:col-span-5 space-y-3">
+          <!-- Rendered by selectBuilding / renderRouteDirections -->
         </div>
       </div>
     </section>
@@ -380,8 +428,8 @@
       <div id="directory-list" class="flex-1 overflow-y-auto pane-scroll space-y-3 pr-1 pb-4"></div>
     </section>
 
-    <!-- 4. STUDENT TOOLS TAB (Stitch Bento Design) -->
-    <section id="tab-tools" class="tab-content overflow-y-auto pane-scroll space-y-4 pr-1 pb-6">
+    <!-- 4. STUDENT TOOLS TAB (Bento Layout + FAQs) -->
+    <section id="tab-tools" class="tab-content overflow-y-auto pane-scroll space-y-4 pr-1 pb-8">
       
       <!-- ATTENDANCE SIMULATOR -->
       <div class="glass-panel p-4 md:p-6 rounded-xl border border-white/10 shadow-xl">
@@ -455,6 +503,17 @@
         </div>
       </div>
 
+      <!-- HANDBOOK FAQ SEARCH & VIEWER -->
+      <div class="glass-panel p-4 md:p-6 rounded-xl border border-white/10 shadow-xl">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="text-2xl">📖</span>
+          <h2 class="font-title-md text-title-md text-primary">Official Student Handbook FAQs (2026–27)</h2>
+        </div>
+        <p class="text-xs text-on-surface-variant mb-4 font-label-mono uppercase tracking-wider">Quick answers with official Handbook page citations</p>
+
+        <div id="handbook-faq-list" class="space-y-2.5"></div>
+      </div>
+
     </section>
 
   </main>
@@ -486,6 +545,57 @@
   <button class="open-sos-btn md:hidden fixed bottom-20 right-4 z-40 bg-sos-red w-13 h-13 rounded-full shadow-[0_0_15px_rgba(255,77,77,0.4)] flex items-center justify-center text-white active:scale-90 transition-transform animate-pulse-sos">
     <span class="material-symbols-outlined filled text-2xl">emergency</span>
   </button>
+
+  <!-- PRIVACY & DATA SECURITY MODAL -->
+  <div id="privacy-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-end sm:items-center justify-center p-3 sm:p-4">
+    <div class="glass-panel w-full max-w-lg rounded-2xl p-5 md:p-6 border border-white/10 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between pb-3 border-b border-white/10">
+        <div class="flex items-center gap-2.5 text-primary">
+          <span class="material-symbols-outlined filled text-xl">security</span>
+          <h2 class="font-title-md text-title-md font-bold text-white">Student Privacy &amp; Data Shield</h2>
+        </div>
+        <button id="close-privacy-btn" class="text-on-surface-variant hover:text-white p-1 rounded-xl hover:bg-white/10 transition-colors">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <!-- Zero-Exfiltration Badge -->
+      <div class="p-3.5 bg-emerald-950/40 border border-success-green/40 rounded-xl flex items-start gap-3">
+        <span class="material-symbols-outlined text-success-green text-xl shrink-0 mt-0.5">verified_user</span>
+        <div class="text-xs space-y-1">
+          <strong class="text-success-green block text-sm">100% Client-Side Local Execution</strong>
+          <p class="text-emerald-300/80 leading-relaxed">
+            AUGI processes all calculations, GPA estimation, and handbook queries entirely in your local browser memory. No student data, calculated grades, or attendance records are ever transmitted to third-party ad networks or tracking servers.
+          </p>
+        </div>
+      </div>
+
+      <!-- Confidentiality Protection -->
+      <div class="p-3.5 bg-surface-container rounded-xl border border-white/5 space-y-2 text-xs">
+        <div class="flex items-center gap-2 text-primary font-bold">
+          <span class="material-symbols-outlined text-sm">lock</span>
+          <span>Confidentiality &amp; Safe Inquiries</span>
+        </div>
+        <p class="text-on-surface-variant leading-relaxed">
+          Queries regarding POSH (Prevention of Sexual Harassment), Anti-Ragging, and Mental Health Counselling are handled under strict confidentiality protocols. Use the <strong>Quick Exit (Esc)</strong> button at any time to immediately conceal the screen and return to the university portal.
+        </p>
+      </div>
+
+      <!-- Data Purge Controls -->
+      <div class="p-3.5 bg-surface-container rounded-xl border border-white/5 space-y-3">
+        <div class="flex items-center justify-between">
+          <div>
+            <h4 class="text-xs font-bold text-white">Purge Saved Data &amp; History</h4>
+            <p class="text-[11px] text-on-surface-variant">Instantly wipe conversation history, GPA courses, and session memory.</p>
+          </div>
+        </div>
+        <button id="purge-data-btn" class="w-full py-2.5 bg-sos-red/20 hover:bg-sos-red/30 text-sos-red border border-sos-red/40 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all active:scale-98">
+          <span class="material-symbols-outlined text-sm">delete_forever</span>
+          <span>Clear All Chat History &amp; Data</span>
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- EMERGENCY SOS MODAL (Stitch Design System) -->
   <div id="sos-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-end sm:items-center justify-center p-3 sm:p-4">
@@ -555,6 +665,12 @@
         </a>
       </div>
     </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast-notification" class="fixed bottom-20 sm:bottom-8 left-1/2 -translate-x-1/2 z-50 px-4 py-2.5 bg-surface-container border border-white/15 rounded-2xl shadow-2xl flex items-center gap-2.5 text-xs text-white pointer-events-none">
+    <span class="material-symbols-outlined text-success-green text-sm">check_circle</span>
+    <span id="toast-message">Data purged successfully.</span>
   </div>
 
   <!-- Scripts -->

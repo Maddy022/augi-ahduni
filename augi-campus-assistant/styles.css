@@ -54,6 +54,21 @@ html, body {
   animation: pulse-sos 2s infinite;
 }
 
+/* Animated Wayfinding Route Dash */
+@keyframes routeDash {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+.animated-route-line {
+  stroke: #ffb4ab;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 10 10;
+  animation: routeDash 1s linear infinite;
+  filter: drop-shadow(0 0 8px rgba(215, 25, 32, 0.9));
+}
+
 /* Glassmorphism utilities */
 .glass-panel {
   background: rgba(26, 29, 35, 0.85);
@@ -74,7 +89,7 @@ html, body {
   border-bottom-color: #d71920;
 }
 
-/* Strict Tab Visibility (Only active tab is displayed) */
+/* Strict Tab Visibility */
 .tab-content {
   display: none !important;
 }
@@ -136,7 +151,7 @@ html, body {
   transform: scale(1.25);
 }
 
-/* Scrollbars */
+/* Custom Scrollbars */
 .pane-scroll::-webkit-scrollbar {
   width: 5px;
 }
@@ -156,4 +171,15 @@ html, body {
   color: #ffb4ab !important;
   border-bottom: 2px solid #d71920 !important;
   font-weight: 700;
+}
+
+/* Toast Notifications */
+#toast-notification {
+  transform: translateY(100px);
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+#toast-notification.show {
+  transform: translateY(0);
+  opacity: 1;
 }
