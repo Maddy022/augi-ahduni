@@ -90,7 +90,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="styles.css?v=3.0"/>
 </head>
 <body class="bg-surface-dim text-on-surface font-body-lg antialiased h-full w-full overflow-hidden flex flex-col select-none">
 
@@ -151,8 +151,8 @@
     </div>
   </header>
 
-  <!-- MAIN VIEWPORT CONTAINER (Isolated Full-Screen Tabs) -->
-  <main class="flex-1 overflow-hidden relative max-w-7xl w-full mx-auto p-3 md:p-6 flex flex-col">
+  <!-- MAIN VIEWPORT CONTAINER (Directional Slide Viewport) -->
+  <main class="tab-main-viewport max-w-7xl mx-auto">
 
     <!-- 1. ASSISTANT CHAT TAB -->
     <section id="tab-chat" class="tab-content active space-y-3">
@@ -176,7 +176,7 @@
     </section>
 
     <!-- 2. CAMPUS MAP TAB (With Wayfinding & Routing) -->
-    <section id="tab-map" class="tab-content space-y-3">
+    <section id="tab-map" class="tab-content slide-right space-y-3">
       <!-- Search & Wayfinding Header -->
       <div class="shrink-0 glass-panel p-2.5 rounded-xl border border-white/10 flex flex-col sm:flex-row gap-2.5 items-center justify-between">
         <!-- Search input -->
@@ -409,7 +409,7 @@
     </section>
 
     <!-- 3. DIRECTORY TAB -->
-    <section id="tab-directory" class="tab-content space-y-3">
+    <section id="tab-directory" class="tab-content slide-right space-y-3">
       <!-- Search & Filters -->
       <div class="shrink-0 flex flex-col sm:flex-row gap-2.5">
         <div class="relative flex-1">
@@ -429,7 +429,7 @@
     </section>
 
     <!-- 4. STUDENT TOOLS TAB (Bento Layout + FAQs) -->
-    <section id="tab-tools" class="tab-content overflow-y-auto pane-scroll space-y-4 pr-1 pb-8">
+    <section id="tab-tools" class="tab-content slide-right overflow-y-auto pane-scroll space-y-4 pr-1 pb-8">
       
       <!-- ATTENDANCE SIMULATOR -->
       <div class="glass-panel p-4 md:p-6 rounded-xl border border-white/10 shadow-xl">
@@ -548,7 +548,7 @@
 
   <!-- PRIVACY & DATA SECURITY MODAL -->
   <div id="privacy-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-end sm:items-center justify-center p-3 sm:p-4">
-    <div class="glass-panel w-full max-w-lg rounded-2xl p-5 md:p-6 border border-white/10 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+    <div class="glass-panel modal-anim w-full max-w-lg rounded-2xl p-5 md:p-6 border border-white/10 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
       <div class="flex items-center justify-between pb-3 border-b border-white/10">
         <div class="flex items-center gap-2.5 text-primary">
           <span class="material-symbols-outlined filled text-xl">security</span>
@@ -599,7 +599,7 @@
 
   <!-- EMERGENCY SOS MODAL (Stitch Design System) -->
   <div id="sos-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-end sm:items-center justify-center p-3 sm:p-4">
-    <div class="glass-panel w-full max-w-md rounded-2xl p-5 border border-sos-red/30 shadow-2xl space-y-3 max-h-[90vh] overflow-y-auto">
+    <div class="glass-panel modal-anim w-full max-w-md rounded-2xl p-5 border border-sos-red/30 shadow-2xl space-y-3 max-h-[90vh] overflow-y-auto">
       <div class="bg-sos-red/10 p-3.5 rounded-xl border border-sos-red/20 flex items-center justify-between">
         <div class="flex items-center gap-2">
           <span class="material-symbols-outlined filled text-sos-red">emergency</span>
@@ -674,7 +674,7 @@
   </div>
 
   <!-- Scripts -->
-  <script src="data.js"></script>
-  <script src="app.js"></script>
+  <script src="data.js?v=3.0"></script>
+  <script src="app.js?v=3.0"></script>
 </body>
 </html>

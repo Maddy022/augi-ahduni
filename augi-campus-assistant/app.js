@@ -1,4 +1,4 @@
-// AUGI - Ahmedabad University AI Assistant Engine (Stitch Design System + Privacy & Security)
+// AUGI - Ahmedabad University AI Assistant Engine (Stitch Design System + Enhanced Speech-to-Text)
 
 document.addEventListener("DOMContentLoaded", () => {
   const data = window.AUGI_DATA;
@@ -147,41 +147,90 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (purgeDataBtn) purgeDataBtn.addEventListener("click", purgeAllUserData);
 
-  // Voice State & Speech Synthesis
+  // -------------------------------------------------------------
+  // HIGH-PRECISION REAL-TIME SPEECH-TO-TEXT ENGINE
+  // -------------------------------------------------------------
   let isListening = false;
   let recognition = null;
-  let synth = window.speechSynthesis;
+  let voiceSubmitTimeout = null;
+  const defaultPlaceholder = "Ask AUGI about attendance, cafeterias, buildings, advisors...";
 
   if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     recognition = new SpeechRecognition();
-    recognition.continuous = false;
-    recognition.interimResults = false;
+    recognition.continuous = true;
+    recognition.interimResults = true;
     recognition.lang = "en-IN";
+    recognition.maxAlternatives = 1;
 
-    recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript;
-      chatInput.value = transcript;
-      handleSendMessage();
+    recognition.onstart = () => {
+      isListening = true;
+      if (voiceBtn) {
+        voiceBtn.classList.add("recording-active");
+        voiceBtn.innerHTML = `<span class="material-symbols-outlined text-base">stop</span>`;
+      }
+      if (chatInput) {
+        chatInput.placeholder = "🎙️ Listening... speak now (tap button when done)";
+      }
+      showToast("🎙️ Microphone active. Speak your question...");
     };
 
-    recognition.onerror = () => stopVoice();
-    recognition.onend = () => stopVoice();
+    recognition.onresult = (event) => {
+      let interimTranscript = "";
+      let finalTranscript = "";
+
+      for (let i = event.resultIndex; i < event.results.length; ++i) {
+        if (event.results[i].isFinal) {
+          finalTranscript += event.results[i][0].transcript;
+        } else {
+          interimTranscript += event.results[i][0].transcript;
+        }
+      }
+
+      if (chatInput) {
+        chatInput.value = finalTranscript || interimTranscript;
+      }
+
+      // If user finished a coherent sentence, schedule smooth auto-submit after silence
+      if (finalTranscript.trim()) {
+        clearTimeout(voiceSubmitTimeout);
+        voiceSubmitTimeout = setTimeout(() => {
+          if (isListening) {
+            stopVoice();
+            handleSendMessage();
+          }
+        }, 800);
+      }
+    };
+
+    recognition.onerror = (event) => {
+      if (event.error === 'not-allowed') {
+        showToast("⚠️ Microphone access denied. Please allow mic permissions in your browser.");
+      } else if (event.error !== 'no-speech') {
+        showToast(`Voice notice: ${event.error}`);
+      }
+      stopVoice();
+    };
+
+    recognition.onend = () => {
+      stopVoice();
+    };
   }
 
   function toggleVoice() {
     if (!recognition) {
-      alert("Speech recognition is not supported in this browser. Please type your message.");
+      showToast("Speech recognition is not supported in this browser. Please use Chrome/Edge.");
       return;
     }
     if (isListening) {
-      recognition.stop();
       stopVoice();
+      if (chatInput && chatInput.value.trim()) {
+        handleSendMessage();
+      }
     } else {
       try {
+        if (chatInput) chatInput.value = "";
         recognition.start();
-        isListening = true;
-        if (voiceBtn) voiceBtn.classList.add("text-primary", "animate-pulse");
       } catch (e) {
         stopVoice();
       }
@@ -190,31 +239,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function stopVoice() {
     isListening = false;
+    clearTimeout(voiceSubmitTimeout);
+    try {
+      if (recognition) recognition.stop();
+    } catch (e) {}
+
     if (voiceBtn) {
-      voiceBtn.classList.remove("text-primary", "animate-pulse");
+      voiceBtn.classList.remove("recording-active");
+      voiceBtn.innerHTML = `<span class="material-symbols-outlined">mic</span>`;
+    }
+    if (chatInput) {
+      chatInput.placeholder = defaultPlaceholder;
     }
   }
 
   if (voiceBtn) voiceBtn.addEventListener("click", toggleVoice);
 
-  window.speakAugi = function(text) {
-    if (!synth) return;
-    synth.cancel();
-    const cleanText = text.replace(/[*_#`]/g, '').replace(/<[^>]*>?/gm, '');
-    const utter = new SpeechSynthesisUtterance(cleanText);
-    utter.rate = 1.05;
-    utter.pitch = 1.0;
-    synth.speak(utter);
-  };
+  // -------------------------------------------------------------
+  // TAB NAVIGATION (Directional Horizontal Slide Transitions)
+  // -------------------------------------------------------------
+  const TAB_ORDER = ["chat", "map", "directory", "tools"];
 
-  // Tab Navigation
   function switchTab(tabId) {
+    if (currentTab === tabId && document.getElementById(`tab-${tabId}`)?.classList.contains("active")) return;
+
+    const targetIdx = TAB_ORDER.indexOf(tabId);
     currentTab = tabId;
-    tabContents.forEach(el => {
-      if (el.id === `tab-${tabId}`) {
-        el.classList.add("active");
+
+    TAB_ORDER.forEach((id, idx) => {
+      const el = document.getElementById(`tab-${id}`);
+      if (!el) return;
+      const isTools = id === "tools";
+      const baseClass = isTools ? "tab-content overflow-y-auto pane-scroll space-y-4 pr-1 pb-8" : "tab-content space-y-3";
+
+      if (idx === targetIdx) {
+        el.className = `${baseClass} active`;
+      } else if (idx < targetIdx) {
+        el.className = `${baseClass} slide-left`;
       } else {
-        el.classList.remove("active");
+        el.className = `${baseClass} slide-right`;
       }
     });
 
@@ -270,7 +333,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // -------------------------------------------------------------
-  // CHAT ASSISTANT (With Input Sanitization)
+  // CHAT ASSISTANT (Listen Feature Removed, Clean & Crisp)
   // -------------------------------------------------------------
   function renderChat() {
     if (!chatContainer) return;
@@ -326,14 +389,8 @@ document.addEventListener("DOMContentLoaded", () => {
               </div>
               ${cardHtml}
               ${chipsHtml}
-              <div class="flex items-center justify-between text-[10px] mt-2 font-label-mono ${isUser ? 'text-red-100' : 'text-on-surface-variant'}">
-                <span>${msg.time}</span>
-                ${!isUser ? `
-                  <button onclick="window.speakAugi('${escapeHtml(msg.text).replace(/'/g, "\\'")}')" class="hover:text-primary transition-colors flex items-center gap-1" title="Read Aloud">
-                    <span class="material-symbols-outlined text-sm">volume_up</span>
-                    <span>Listen</span>
-                  </button>
-                ` : ''}
+              <div class="text-[10px] mt-1.5 font-label-mono ${isUser ? 'text-red-100 text-right' : 'text-on-surface-variant'}">
+                ${msg.time}
               </div>
             </div>
             ${isUser ? `
@@ -694,7 +751,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // -------------------------------------------------------------
-  // ADVISORS DIRECTORY ENGINE (With Sanitization)
+  // ADVISORS DIRECTORY ENGINE
   // -------------------------------------------------------------
   const directorySearch = document.getElementById("directory-search");
   const schoolFilter = document.getElementById("school-filter");
@@ -866,7 +923,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (missedClassesInput) missedClassesInput.addEventListener("input", calculateAttendance);
 
   // -------------------------------------------------------------
-  // GPA CALCULATOR ENGINE (With Input Sanitization)
+  // GPA CALCULATOR ENGINE (4.00 Scale)
   // -------------------------------------------------------------
   let gpaCourses = [
     { name: "Course 1", credits: 3, grade: "A" },

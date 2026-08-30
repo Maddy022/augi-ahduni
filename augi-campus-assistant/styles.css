@@ -39,9 +39,76 @@ html, body {
 /* Material Symbols */
 .material-symbols-outlined {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  transition: font-variation-settings 0.25s ease, transform 0.25s ease;
 }
 .material-symbols-outlined.filled {
   font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* ------------------------------------------------------------- */
+/* NATIVE DIRECTIONAL HORIZONTAL SLIDE TAB TRANSITIONS           */
+/* ------------------------------------------------------------- */
+main.tab-main-viewport {
+  position: relative !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  flex: 1 1 0% !important;
+}
+
+.tab-content {
+  position: absolute !important;
+  top: 0.75rem !important;
+  bottom: 0.75rem !important;
+  left: 0.75rem !important;
+  right: 0.75rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateX(100%) scale(0.97);
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1), 
+              opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+              visibility 0.42s ease !important;
+  will-change: transform, opacity;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .tab-content {
+    top: 1.5rem !important;
+    bottom: 1.5rem !important;
+    left: 1.5rem !important;
+    right: 1.5rem !important;
+  }
+}
+
+/* Active Tab (Centered) */
+.tab-content.active {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: translateX(0%) scale(1) !important;
+  z-index: 10 !important;
+}
+
+/* Slid to Left */
+.tab-content.slide-left {
+  transform: translateX(-100%) scale(0.97) !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+
+/* Slid to Right */
+.tab-content.slide-right {
+  transform: translateX(100%) scale(0.97) !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
 }
 
 /* Pulse Animation for SOS */
@@ -52,6 +119,19 @@ html, body {
 }
 .animate-pulse-sos {
   animation: pulse-sos 2s infinite;
+}
+
+/* Animated Microphone Recording Ring */
+@keyframes pulse-mic {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(215, 25, 32, 0.7); }
+  50% { transform: scale(1.08); box-shadow: 0 0 0 10px rgba(215, 25, 32, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(215, 25, 32, 0); }
+}
+.recording-active {
+  background-color: #d71920 !important;
+  color: #FFFFFF !important;
+  animation: pulse-mic 1.5s infinite ease-in-out;
+  border-radius: 9999px;
 }
 
 /* Animated Wayfinding Route Dash */
@@ -75,13 +155,14 @@ html, body {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 
 .input-dark {
   background-color: #2D323B;
   border: none;
   border-bottom: 2px solid transparent;
-  transition: border-color 0.2s;
+  transition: all 0.25s ease;
   color: #FFFFFF;
 }
 .input-dark:focus {
@@ -89,16 +170,19 @@ html, body {
   border-bottom-color: #d71920;
 }
 
-/* Strict Tab Visibility */
-.tab-content {
-  display: none !important;
+/* Message Slide-In Animation */
+@keyframes msgSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.tab-content.active {
-  display: flex !important;
-  flex-direction: column !important;
-  height: 100% !important;
-  width: 100% !important;
-  flex: 1 1 0% !important;
+.msg-anim {
+  animation: msgSlideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Chat Bubbles */
@@ -107,6 +191,7 @@ html, body {
   color: #FFFFFF !important;
   border-radius: 16px 16px 4px 16px;
   box-shadow: 0 4px 14px rgba(215, 25, 32, 0.35);
+  transition: transform 0.2s ease;
 }
 
 .chat-bubble-augi {
@@ -114,28 +199,35 @@ html, body {
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
   color: #e3e2e5 !important;
   border-radius: 16px 16px 16px 4px;
+  transition: transform 0.2s ease;
 }
 
 .chip-btn {
   background: #292a2c !important;
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
   color: #e3e2e5 !important;
-  transition: all 0.15s ease;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .chip-btn:hover {
   background: #38393b !important;
   border-color: #d71920 !important;
   color: #ffb4ab !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(215, 25, 32, 0.25);
+}
+.chip-btn:active {
+  transform: scale(0.96);
 }
 
 /* Map Interactions */
 .map-building {
   cursor: pointer;
-  transition: transform 0.15s ease, filter 0.15s ease;
+  transition: transform 0.25s ease, filter 0.25s ease;
   transform-origin: center;
 }
 .map-building:hover {
   filter: drop-shadow(0 4px 14px rgba(215, 25, 32, 0.6));
+  transform: scale(1.015);
 }
 .map-building.selected rect.bldg-card {
   stroke: #d71920 !important;
@@ -145,10 +237,10 @@ html, body {
 
 .gate-marker {
   cursor: pointer;
-  transition: transform 0.15s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .gate-marker:hover {
-  transform: scale(1.25);
+  transform: scale(1.3);
 }
 
 /* Custom Scrollbars */
@@ -161,23 +253,43 @@ html, body {
 .pane-scroll::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.15);
   border-radius: 9999px;
+  transition: background 0.25s ease;
 }
 .pane-scroll::-webkit-scrollbar-thumb:hover {
   background: #d71920;
 }
 
-/* Nav button active states */
+/* Nav Button Active Transitions */
+.nav-btn {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
 .nav-btn.active-tab {
   color: #ffb4ab !important;
   border-bottom: 2px solid #d71920 !important;
   font-weight: 700;
 }
 
+/* Modal Scale-In Animation */
+@keyframes modalScaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.94) translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+.modal-anim {
+  animation: modalScaleIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 /* Toast Notifications */
 #toast-notification {
   transform: translateY(100px);
   opacity: 0;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
 }
 #toast-notification.show {
   transform: translateY(0);
