@@ -706,8 +706,103 @@ document.addEventListener("DOMContentLoaded", () => {
     selectBuilding(buildingId);
   };
 
+  // -------------------------------------------------------------
+  // MAP PAN & ZOOM ENGINE (Full Mobile & Desktop Support)
+  // -------------------------------------------------------------
+  const mapZoomInBtn = document.getElementById("map-zoom-in");
+  const mapZoomOutBtn = document.getElementById("map-zoom-out");
+  const mapZoomResetBtn = document.getElementById("map-zoom-reset");
+
+  let currentViewBox = { x: 0, y: 0, w: 1200, h: 800 };
+  let isPanning = false;
+  let panStartX = 0;
+  let panStartY = 0;
+  let hasDragged = false;
+
+  function updateSvgViewBox() {
+    if (!mapSvg) return;
+    mapSvg.setAttribute("viewBox", `${currentViewBox.x} ${currentViewBox.y} ${currentViewBox.w} ${currentViewBox.h}`);
+  }
+
+  function zoomMap(factor) {
+    const newW = currentViewBox.w * factor;
+    const newH = currentViewBox.h * factor;
+    if (newW < 280 || newW > 1600) return;
+
+    currentViewBox.x += (currentViewBox.w - newW) / 2;
+    currentViewBox.y += (currentViewBox.h - newH) / 2;
+    currentViewBox.w = newW;
+    currentViewBox.h = newH;
+    updateSvgViewBox();
+  }
+
+  function resetMapZoom() {
+    currentViewBox = { x: 0, y: 0, w: 1200, h: 800 };
+    updateSvgViewBox();
+  }
+
+  if (mapZoomInBtn) mapZoomInBtn.addEventListener("click", () => zoomMap(0.75));
+  if (mapZoomOutBtn) mapZoomOutBtn.addEventListener("click", () => zoomMap(1.33));
+  if (mapZoomResetBtn) mapZoomResetBtn.addEventListener("click", resetMapZoom);
+
+  // Mouse & Touch Pan Handling
   if (mapSvg) {
+    function startPan(clientX, clientY) {
+      isPanning = true;
+      hasDragged = false;
+      panStartX = clientX;
+      panStartY = clientY;
+    }
+
+    function movePan(clientX, clientY) {
+      if (!isPanning) return;
+      const rect = mapSvg.getBoundingClientRect();
+      const scaleX = currentViewBox.w / rect.width;
+      const scaleY = currentViewBox.h / rect.height;
+
+      const dx = (clientX - panStartX) * scaleX;
+      const dy = (clientY - panStartY) * scaleY;
+
+      if (Math.abs(clientX - panStartX) > 4 || Math.abs(clientY - panStartY) > 4) {
+        hasDragged = true;
+      }
+
+      currentViewBox.x -= dx;
+      currentViewBox.y -= dy;
+
+      panStartX = clientX;
+      panStartY = clientY;
+      updateSvgViewBox();
+    }
+
+    function endPan() {
+      isPanning = false;
+    }
+
+    mapSvg.addEventListener("mousedown", (e) => {
+      startPan(e.clientX, e.clientY);
+    });
+    window.addEventListener("mousemove", (e) => {
+      if (isPanning) movePan(e.clientX, e.clientY);
+    });
+    window.addEventListener("mouseup", endPan);
+
+    mapSvg.addEventListener("touchstart", (e) => {
+      if (e.touches.length === 1) {
+        startPan(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    }, { passive: true });
+
+    mapSvg.addEventListener("touchmove", (e) => {
+      if (isPanning && e.touches.length === 1) {
+        movePan(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    }, { passive: true });
+
+    mapSvg.addEventListener("touchend", endPan);
+
     mapSvg.addEventListener("click", (e) => {
+      if (hasDragged) return; // Prevent triggering building selection if user was dragging map
       const bldg = e.target.closest(".map-building");
       if (bldg && bldg.dataset.id) {
         selectBuilding(bldg.dataset.id);

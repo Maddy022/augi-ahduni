@@ -175,8 +175,8 @@
       </div>
     </section>
 
-    <!-- 2. CAMPUS MAP TAB (With Wayfinding & Routing) -->
-    <section id="tab-map" class="tab-content slide-right space-y-3">
+    <!-- 2. CAMPUS MAP TAB (With Wayfinding, Pan & Zoom) -->
+    <section id="tab-map" class="tab-content slide-right overflow-y-auto pane-scroll space-y-3 pb-24 md:pb-6">
       <!-- Search & Wayfinding Header -->
       <div class="shrink-0 glass-panel p-2.5 rounded-xl border border-white/10 flex flex-col sm:flex-row gap-2.5 items-center justify-between">
         <!-- Search input -->
@@ -186,7 +186,7 @@
         </div>
 
         <!-- Wayfinding Quick Selector -->
-        <div class="flex items-center gap-2 w-full sm:w-auto">
+        <div class="flex flex-wrap sm:flex-nowrap items-center gap-2 w-full sm:w-auto">
           <select id="route-start" class="input-dark text-xs p-1.5 rounded-lg flex-1 sm:flex-none">
             <option value="g10">Start: Gate 10 (Main)</option>
             <option value="g12">Start: Gate 12 (UC)</option>
@@ -212,10 +212,22 @@
       </div>
 
       <!-- Map & Details Grid -->
-      <div class="flex-1 overflow-y-auto pane-scroll grid grid-cols-1 lg:grid-cols-12 gap-3.5 items-start pr-1 pb-4">
-        <!-- SVG Map Container -->
-        <div class="lg:col-span-7 bg-[#080C14] rounded-2xl overflow-hidden border border-white/10 shadow-lg p-2 aspect-[16/11] relative">
-          <svg id="campus-map-svg" viewBox="0 0 1200 800" class="w-full h-full">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-3.5 items-start">
+        <!-- SVG Map Container with Interactive Controls -->
+        <div class="lg:col-span-7 bg-[#080C14] rounded-2xl overflow-hidden border border-white/10 shadow-lg p-2 aspect-[16/11] relative min-h-[300px] sm:min-h-[360px] group">
+          <!-- Floating Map Zoom & Pan Controls -->
+          <div class="absolute top-3 right-3 z-20 flex flex-col gap-1 bg-surface-container/90 backdrop-blur-md p-1 rounded-xl border border-white/15 shadow-xl">
+            <button id="map-zoom-in" class="w-7 h-7 flex items-center justify-center text-white hover:text-primary hover:bg-white/10 rounded-lg transition-all active:scale-95" title="Zoom In">
+              <span class="material-symbols-outlined text-sm">add</span>
+            </button>
+            <button id="map-zoom-out" class="w-7 h-7 flex items-center justify-center text-white hover:text-primary hover:bg-white/10 rounded-lg transition-all active:scale-95" title="Zoom Out">
+              <span class="material-symbols-outlined text-sm">remove</span>
+            </button>
+            <button id="map-zoom-reset" class="w-7 h-7 flex items-center justify-center text-white hover:text-primary hover:bg-white/10 rounded-lg transition-all active:scale-95" title="Reset View">
+              <span class="material-symbols-outlined text-sm">fit_screen</span>
+            </button>
+          </div>
+          <svg id="campus-map-svg" viewBox="0 0 1200 800" class="w-full h-full cursor-grab active:cursor-grabbing touch-none select-none">
             <defs>
               <pattern id="campus-grid-dark" width="50" height="50" patternUnits="userSpaceOnUse">
                 <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#1E293B" stroke-width="0.8"/>
